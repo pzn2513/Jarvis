@@ -189,29 +189,29 @@ mgetpix(arr){
         return
     }
 }
-waitpix(x,y,color,similar:=0,appear_times:=0,function:=()=>{},interval:=100){
+waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100){
     num:=0
     loop{
         PixelSearch &fx, &fy, x, y, x, y, color, similar
         if(appear_times>=0){
-            ; 可运行直到确认出现须积累的次数
+            ; 可运行直到确认出现须积累的次数,0和1效果一样，都找到就退出
             if(fx!=""){
+                num++
                 if(num>=appear_times){
                     ; Tip fx "," fy
                     break
                 }
-                num++
             }else{
                 num:=0
             }
         }else{
             ; 可运行直到确认消失须积累的次数
             if(fx==""){
-                if(num<appear_times){
+                num--
+                if(num<=appear_times){
                     ; Tip fx "," fy
                     break
                 }
-                num--
             }else{
                 num:=0
             }
@@ -220,7 +220,7 @@ waitpix(x,y,color,similar:=0,appear_times:=0,function:=()=>{},interval:=100){
         sleep interval
     }
 }
-sendstd(key,delay:=100,keeppress:=30){
+sendstd(key,delay:=150,keeppress:=30){
     send "{" key " Down}"
     sleep keeppress
     send "{" key " Up}"

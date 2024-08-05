@@ -49,13 +49,7 @@
     Send "{d Up}"
     Sleep 1200
     Send "{d Down}"
-    Loop 12
-    {
-        Send "{f Down}"
-        Sleep 50
-        Send "{f Up}"
-        Sleep 150
-    }
+    waitpix 969,815,0xFFFFFF,0,1,()=>sendstd("f",100) ;完成
     Send "{d Up}"
     Sleep 10
     Send "{w Up}"

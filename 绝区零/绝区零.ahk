@@ -3,16 +3,14 @@
 ^Numpad1::拿命验收循环()
 ^0::拿命验收循环()
 ^Numpad2::零号刷特殊区域()
-!Numpad0::t()
+AppsKey & Numpad0::t()
 ; #Numpad0::ttt()
 #HotIf
 #Include 零号业绩.ahk
 #Include 拿命验收.ahk
 
 t(){
-    tip "点击确认"
-    SendEvent "{Click 1402 800 Down}{click 1402 300 Up}" ;比input兼容性强
-    ; MouseClickDrag "left", 1402, 800, 1402, 400
+    waitpix 210,46,0xE3E3E3,0,-1,()=>sendstd("alt") ;入场，按alt加速
 }
 
 ; ttt(){
