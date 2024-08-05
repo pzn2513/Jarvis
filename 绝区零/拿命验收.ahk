@@ -1,0 +1,105 @@
+﻿拿命验收循环(){
+    Loop{
+        拿命验收()
+    }
+}
+
+拿命验收(){
+    WinActivate "绝区零 ahk_class UnityWndClass"
+    loop{
+        if(getpix(1236, 52, 0xE4CC00, 6)){ ;HDD首页 黄球
+            waitpix(1236, 52, 0xE4CC00, 6,-4,()=>click(921,667)) ;点到消失
+            break
+        }else if(getpix(1512, 1023, 0x1B1B1B, 6)){ ; 累了 对话框边框
+            拿命验收_shafa()
+        }
+    }
+    waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
+    ; MouseClickDrag "left", 1402, 800, 1402, 400 ;上划
+    SendEvent("{Click 1402 800 Down}{click 1402 300 Up}")
+    sleep 500
+    waitpix(1141,599,0xAAAAAA,6,0,()=>SendEvent("{Click 1402 800 Down}{click 1402 300 Up}"),500) ;比input兼容性强
+    click 1334,599
+    sleep 100
+    click 1719,1035
+    waitpix(1726, 49, 0xcccccc, 6,-25,()=>click(1719,1035)) ;队伍
+    /*
+    打箱子精细操作
+    */
+    WinActivate "绝区零 ahk_class UnityWndClass"
+    waitpix 1563,963,0x979697,0 ;战斗开始 灰色闪避
+    Send "{w Down}"
+    Sleep 550
+    Click "R D"
+    Sleep 100
+    Click "R U"
+    Sleep 300
+    Click "D"
+    Sleep 100
+    Click "U"
+    Sleep 200
+    Send "{Space Down}"
+    Sleep 100
+    Send "{Space Up}"
+    Sleep 100
+    Click "R D"
+    Sleep 300
+    Send "{d Down}"
+    Sleep 1500
+    Send "{d Up}"
+    Sleep 1200
+    Send "{d Down}"
+    Loop 12
+    {
+        Send "{f Down}"
+        Sleep 50
+        Send "{f Up}"
+        Sleep 150
+    }
+    Send "{d Up}"
+    Sleep 10
+    Send "{w Up}"
+    Sleep 10
+    Click "R U"
+    waitpix 1690,1030,0xFFFFFF,0,1,()=>click(1511,662) ;完成
+    waitpix 1690,1030,0xFFFFFF,0,-25,()=>click(1720,1030) ;完成
+    sleep 3000  
+}
+拿命验收_shafa(){
+    /*
+    沙发爬起来继续，点到界面出现
+    */
+    WinActivate "绝区零 ahk_class UnityWndClass"
+    Loop 10
+    {
+        Click 960, 540
+        Sleep 300
+    }
+    waitpix(1777, 897, 0xFFFFFF, 0,5,()=>click(960,540))
+    Send "{d Down}"
+    Sleep 94
+    Send "{s Down}"
+    Sleep 406
+    Send "{a Down}"
+    Sleep 16
+    Send "{d Up}"
+    Sleep 406
+    Send "{d Down}"
+    Sleep 16
+    Send "{a Up}"
+    Sleep 400
+    Send "{f Down}"
+    Sleep 171
+    Send "{f Up}"
+    Sleep 157
+    Send "{f Down}"
+    Sleep 125
+    Send "{f Up}"
+    Sleep 125
+    Send "{f Down}"
+    Sleep 200
+    Send "{f Up}"
+    Send "{s Up}"
+    Send "{d Up}"
+    Sleep 600    
+}
