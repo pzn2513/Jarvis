@@ -15,11 +15,15 @@
         }
     }
     waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
-    ; MouseClickDrag "left", 1402, 800, 1402, 400 ;上划
-    SendEvent("{Click 1402 800 Down}{click 1402 300 Up}")
-    sleep 500
-    waitpix(1141,599,0xAAAAAA,6,0,()=>SendEvent("{Click 1402 800 Down}{click 1402 300 Up}"),500) ;比input兼容性强
-    click 1334,599
+    if(getpix(1142,845,0xF4F4F4)){
+        click 1200,845
+    }else{
+        ; MouseClickDrag "left", 1402, 800, 1402, 400 ;上划
+        SendEvent("{Click 1402 800 Down}{click 1402 300 Up}")
+        sleep 500
+        waitpix(1141,599,0xAAAAAA,6,0,()=>SendEvent("{Click 1402 800 Down}{click 1402 300 Up}"),500) ;比input兼容性强
+        click 1334,599        
+    }
     sleep 100
     click 1719,1035
     waitpix(1726, 49, 0xcccccc, 6,-25,()=>click(1719,1035)) ;队伍
@@ -29,7 +33,7 @@
     WinActivate "绝区零 ahk_class UnityWndClass"
     waitpix 1563,963,0x979697,0 ;战斗开始 灰色闪避
     Send "{w Down}"
-    Sleep 550
+    Sleep 250
     Click "R D"
     Sleep 100
     Click "R U"
@@ -49,16 +53,24 @@
     Send "{d Up}"
     Sleep 1200
     Send "{d Down}"
-    waitpix 969,815,0xFFFFFF,0,1,()=>sendstd("f",100) ;完成
+    res:=waitpix(969,815,0xFFFFFF,0,1,()=>sendstd("f",100),100,10000) ;完成
     Send "{d Up}"
     Sleep 10
     Send "{w Up}"
     Sleep 10
-    Click "R U"
-    waitpix 1690,1030,0xFFFFFF,0,1,()=>click(1511,662) ;完成
-    waitpix 1690,1030,0xFFFFFF,0,-25,()=>click(1720,1030) ;完成
-    sleep 3000  
+    Click "R U"    
+    if(res=="timeout"){
+        waitpix 1594,1027,0xCB0000,0,1,()=>sendstd("esc") ;放弃
+        click(1594,1027)
+        waitpix 1120,627,0xF8F8F8,0 ;确认
+        click(1120,627)
+    }else{
+        waitpix 1690,1030,0xFFFFFF,0,1,()=>click(1511,662) ;完成
+        waitpix 1690,1030,0xFFFFFF,0,-25,()=>click(1720,1030) ;完成
+    }
+    Sleep 3000
 }
+
 拿命验收_shafa(){
     /*
     沙发爬起来继续，点到界面出现

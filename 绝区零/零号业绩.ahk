@@ -60,42 +60,30 @@
         Sleep 100
         click(1110,626)
     }
-    waitpix 210,46,0xE3E3E3,0 ;入场，按alt加速
-    waitpix 210,46,0xE3E3E3,0,-1,()=>sendstd("alt") ;入场，按alt加速
-    ; 有的没有鸣徽选择
-    reset_arr:=[0,0]
-    count_arr:=reset_arr
-    loop{
-        if(getpix(952,792,0xFFFFFF)){ ;选择鸣徽
-            if(count_arr[1]==0){
-                count_arr:=reset_arr
-                count_arr[1]:=count_arr[1]+1
-            }else{
-                count_arr[1]:=count_arr[1]+1
-            }
-            if(count_arr[1]>2){
-                sleep 200
-                click(952,792)
-                break    
-            }
-        }else if(getpix(1291,363,0x343334)){ ;聊天框
-            if(count_arr[2]==0){
-                count_arr:=reset_arr
-                count_arr[2]:=count_arr[2]+1
-            }else{
-                count_arr[2]:=count_arr[2]+1
-            }
-            if(count_arr[2]>2){
-                break
-            }
+    /* 
+    开场有鸣徽
+    开场无鸣徽 210,46,0x4F4F4F
+    */
+    func_select([
+        [()=>getpix(210,46,0xE3E3E3),()=>start_minghui(true)],
+        [()=>getpix(210,46,0x4F4F4F),()=>start_minghui(false)],
+    ],1)
+    start_minghui(minghui){
+        if(minghui){
+            waitpix 210,46,0xE3E3E3,0,-1,()=>sendstd("alt") ;入场，按alt加速
+            waitpix 952,792,0xFFFFFF,0 ;选择鸣徽
+            waitpix 952,792,0xFFFFFF,0,-2,()=>click(952,792) ;选择鸣徽
+            waitpix 1849,88,0x242424,5,2,()=>click(1372,678) ;拒绝好意
+        }else{
+            waitpix 1849,88,0x242424,5,2,()=>click(1372,678) ;拒绝好意
+            waitpix 210,46,0xE3E3E3,0,-1,()=>sendstd("alt") ;按alt加速
         }
-        sleep 100
     }
-    waitpix 1849,88,0x242424,5,2,()=>click(1372,678) ;拒绝好意
 }
+
+
 特殊区域_上路(){
     WinActivate("绝区零 ahk_class UnityWndClass")
-    
     零号业绩_giveup()
 }
 特殊区域_下路(){
@@ -145,13 +133,13 @@
     loop{
         零号业绩_shark_fight()
         if(getpix(560,309,0x41C01D)){ ;战斗结束 绿球 有调查点 有奖励
-            waitpix 560,309,0x41C01D,0,-3,()=>click(1136,1002)
+            waitpix 560,309,0x41C01D,0,-3,()=>click(1136,970)
             break
         }else if(getpix(560,266,0x44C41C)){ ;战斗结束 绿球 无调查点 有奖励
-            waitpix 560,266,0x44C41C,0,-3,()=>click(1136,1002)
+            waitpix 560,266,0x44C41C,0,-3,()=>click(1136,970)
             break 
         }else if(getpix(560,373,0x41C01D)){ ;战斗结束 绿球 无调查点 无奖励
-            waitpix 560,373,0x41C01D,0,-3,()=>click(1136,1002)
+            waitpix 560,373,0x41C01D,0,-3,()=>click(1136,970)
             break 
         }
         sleep 100

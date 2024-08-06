@@ -54,11 +54,57 @@ PrintScreen & Numpad0::tip("PrintScreen热键，拦截原功能，只做热键�
 Insert & Numpad0::tip("Insert热键，拦截原功能，只做热键触发器")
 ~PrintScreen & ScrollLock::mouse_spy_exe()
 
-
 global mX,mY,mColor,wId,wX,wY,wW,wH,wTitle,wClass,wExe,wPath
 global cId,cX,cY,cW,cH,cTitle,cClass,cExe,cPath,hide_id
 hide_id:=""
 
+; 定义系统光标常量
+IDC_ARROW := 32512
+IDC_CROSS := 32515
+
+; 按下 Win+C 键时切换光标
+#c::SystemCursor("Toggle")
+
+; 确保脚本退出时光标恢复为箭头
+OnExit(*) => SystemCursor("Show")
+
+SystemCursor(cmd)  ; cmd = "Show|Hide|Toggle|Reload"
+{
+    static visible := true, c := Map()
+    static sys_cursors := [32512, 32513, 32514, 32515, 32516, 32642
+                         , 32643, 32644, 32645, 32646, 32648, 32649, 32650]
+    
+    if (cmd = "Reload" or !c.Count)  ; 在请求或首次调用时进行重载.
+    {
+        for i, id in sys_cursors
+        {
+            h_cursor  := DllCall("LoadCursor", "Ptr", 0, "Ptr", id)
+            h_default := DllCall("CopyImage", "Ptr", h_cursor, "UInt", 2
+                , "Int", 0, "Int", 0, "UInt", 0)
+            c[id] := {default: h_default}
+        }
+        ; 加载十字光标并创建其副本
+        h_cursor  := DllCall("LoadCursor", "Ptr", 0, "Int", IDC_CROSS)
+        h_cross := DllCall("CopyImage", "Ptr", h_cursor, "UInt", 2
+            , "Int", 0, "Int", 0, "UInt", 0)
+    }
+    
+    switch cmd
+    {
+      case "Show": visible := true
+      case "Hide": visible := false
+      case "Toggle": visible := !visible
+      default: return
+    }
+    
+    for id, handles in c
+    {
+        h_cursor := DllCall("CopyImage"
+            , "Ptr", visible ? handles.default : h_cross
+            , "UInt", 2, "Int", 0, "Int", 0, "UInt", 0)
+        DllCall("SetSystemCursor", "Ptr", h_cursor, "UInt", id)
+    }
+}
 
 w_hide_show(){
     global hide_id
@@ -89,16 +135,56 @@ mouse_spy_exe(){
     global mouse_spy_bool := !mouse_spy_bool ;mouse_spy_bool的值是可读的，但要修改必须使用global关键字；否则会被AHK认为是局部变量，在表达式中声明未赋值的同时使用就会出错。
     if (mouse_spy_bool) {
         SetTimer(mouse_spy, 100)
-        Hotkey("alt",mspy_changeCoord,"On")
-        Hotkey("alt up",mspy_changeCoord,"On")
-        Hotkey("*RButton up",mspy_saveClipboard,"On")
+        ; Hotkey("alt",mspy_changeCoord,"On")
+        ; Hotkey("alt up",mspy_changeCoord,"On")
+        Hotkey("RButton up",mspy_saveClipboard,"On")
+        Hotkey("Up",mspy_up,"On")
+        Hotkey("Down",mspy_down,"On")
+        Hotkey("Right",mspy_right,"On")
+        Hotkey("Left",mspy_left,"On")
+        Hotkey("^Up",mspy_up_fast,"On")
+        Hotkey("^Down",mspy_down_fast,"On")
+        Hotkey("^Right",mspy_right_fast,"On")
+        Hotkey("^Left",mspy_left_fast,"On")
     } else {
         SetTimer(mouse_spy, 0)
         ToolTip
-        Hotkey("alt",mspy_changeCoord,"Off")
-        Hotkey("alt up",mspy_changeCoord,"Off")
-        Hotkey("*RButton up",mspy_saveClipboard,"Off")
+        ; Hotkey("alt",mspy_changeCoord,"Off")
+        ; Hotkey("alt up",mspy_changeCoord,"Off")
+        Hotkey("RButton up",mspy_saveClipboard,"Off")
+        Hotkey("Up",mspy_up,"Off")
+        Hotkey("Down",mspy_down,"Off")
+        Hotkey("Right",mspy_right,"Off")
+        Hotkey("Left",mspy_left,"Off")
+        Hotkey("^Up",mspy_up_fast,"Off")
+        Hotkey("^Down",mspy_down_fast,"Off")
+        Hotkey("^Right",mspy_right_fast,"Off")
+        Hotkey("^Left",mspy_left_fast,"Off")
     }
+}
+mspy_up(ThisHotkey){
+    click mX,mY-1,0
+}
+mspy_down(ThisHotkey){
+    click mX,mY+1,0
+}
+mspy_right(ThisHotkey){
+    click mX+1,mY,0
+}
+mspy_left(ThisHotkey){
+    click mX-1,mY,0
+}
+mspy_up_fast(ThisHotkey){
+    click mX,mY-10,0
+}
+mspy_down_fast(ThisHotkey){
+    click mX,mY+10,0
+}
+mspy_right_fast(ThisHotkey){
+    click mX+10,mY,0
+}
+mspy_left_fast(ThisHotkey){
+    click mX-10,mY,0
 }
 mspy_changeCoord(ThisHotkey){
     if(CoordMode_RelativeTo="Client"){
@@ -114,7 +200,7 @@ mspy_saveClipboard(ThisHotkey){
 mouse_spy(RelativeTo := "Client") {
     ; CoordMode不使用默认就是Client，适合大多数情况
     CoordMode("Mouse", CoordMode_RelativeTo)
-    CoordMode("ToolTip", CoordMode_RelativeTo)
+    ; CoordMode("ToolTip", CoordMode_RelativeTo)
     CoordMode("Pixel", CoordMode_RelativeTo)
     global mX,mY,mColor,wId,wX,wY,wW,wH,wTitle,wClass,wExe,wPath
     MouseGetPos(&mX, &mY, &wId)
@@ -125,7 +211,7 @@ mouse_spy(RelativeTo := "Client") {
     wExe := WinGetProcessName(wId)
     wPath := WinGetProcessPath(wId)
     global text
-    text := "坐标: (" mX ", " mY ")    ALT转换坐标系,当前:" CoordMode_RelativeTo "`n"
+    text := "坐标: (" mX ", " mY ")    激活窗口的坐标系,当前:" CoordMode_RelativeTo "`n"
     . "颜色: " mColor "`n" 
     . "句柄: " wId "`n"
     . "窗口名: " wTitle "`n"
@@ -136,7 +222,7 @@ mouse_spy(RelativeTo := "Client") {
     lines := 8
     if(wExe!="AutoHotkey64.exe"){
         if(mY+wY>1000-18*lines){ ; 根据行数动态调整
-            Tooltip(text, mX+15, mY+wY-15-18*lines)
+            Tooltip(text, mX+15, mY-15-18*lines)
         }else{
             Tooltip(text, mX+30, mY+30)
         }
@@ -165,6 +251,41 @@ client_spy(title:="A"){
 /*
 一些工具函数
 */
+func_select(arr,keep_appear_times:=1){
+    ; 传入二维数组arr,[[判断函数，执行函数],...]
+    reset_arr:=CreateZeroArray(arr.Length)
+    count_arr:=reset_arr
+    loop{
+        for k,v in arr{
+            if(v[1]()){
+                if(count_arr[k]==0){
+                    count_arr:=reset_arr
+                    count_arr[k]:=count_arr[k]+1
+                }else{
+                    count_arr[k]:=count_arr[k]+1
+                }
+                if(count_arr[k]>=keep_appear_times){
+                    tip "func_select执行: " k
+                    if(v.Has(2)){
+                        tip "1 :" v.Has(2)
+                        v[2]() 
+                    }else{
+                        tip "0 :" v.Has(2)
+                    }
+                    return k
+                }
+            }
+        }
+        sleep 100
+    }
+}
+CreateZeroArray(num) {
+    zeroArray := []
+    loop num {
+        zeroArray.Push(0)
+    }
+    return zeroArray
+}
 getpix(x,y,color,similar:=0){
     PixelSearch &fx, &fy, x, y, x, y, color, similar
     if(fx!=""){
@@ -189,7 +310,8 @@ mgetpix(arr){
         return
     }
 }
-waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100){
+waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100,timeout:=0){
+    StartTime := A_TickCount
     num:=0
     loop{
         PixelSearch &fx, &fy, x, y, x, y, color, similar
@@ -198,8 +320,8 @@ waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100){
             if(fx!=""){
                 num++
                 if(num>=appear_times){
-                    ; Tip fx "," fy
-                    break
+                    ; tip "waitpix ok,appear_times:" num
+                    return [x,y,color]
                 }
             }else{
                 num:=0
@@ -209,8 +331,52 @@ waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100){
             if(fx==""){
                 num--
                 if(num<=appear_times){
-                    ; Tip fx "," fy
-                    break
+                    ; tip "waitpix ok,appear_times:" num
+                    return [x,y,color]
+                }
+            }else{
+                num:=0
+            }
+        }
+        function()
+        sleep interval
+        if(timeout>0 && A_TickCount-StartTime>timeout){
+            return "timeout"
+        }
+    }
+}
+; waitpix如果容易误判的，就用mwaitpix加多几个pix增强可信度
+mwaitpix(arr,correct_offset:=0,appear_times:=1,function:=()=>{},interval:=100){
+    ; arr:=[[x,y,color,similar],...]
+    num:=0
+    loop{
+        correct:=[]
+        for k,v in arr{
+            if(!v.Has(4)){
+                v.push(0)
+            }
+            PixelSearch &fx, &fy, v[1], v[2], v[1], v[2], v[3], v[4]
+            if(fx!=""){
+                correct.Push(v)
+            }
+        }
+        tip "correct: " correct.Length
+        if(appear_times>=0){
+            ; 可运行直到确认出现须积累的次数,0和1效果一样，都找到就退出
+            if(correct.Length>=arr.length-correct_offset){
+                num++
+                if(num>=appear_times){
+                    return correct
+                }
+            }else{
+                num:=0
+            }
+        }else{
+            ; 可运行直到确认消失须积累的次数
+            if(correct.Length<arr.length-correct_offset){
+                num--
+                if(num<=appear_times){
+                    return correct
                 }
             }else{
                 num:=0
