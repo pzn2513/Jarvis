@@ -83,7 +83,7 @@
     waitpix(1777, 897, 0xFFFFFF, 0,5,()=>click())
     sendstd "d",20,400
     send "{s Down}"
-    Sleep 300
+    Sleep 400
     sendstd "a",20,500
     send "{d Down}"
     res:=waitpix(1236, 52, 0xE4CC00,6,1,()=>sendstd("f"),100,3000)
