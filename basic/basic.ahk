@@ -20,6 +20,7 @@ NumpadHome::tip(7) ;+Numpad7
 NumpadUp::tip(8) ;+Numpad8
 NumpadPgUp::tip(9) ;+Numpad9
 PgDn & Numpad0::tip("PgDn热键，拦截原功能，只做热键触发器")
+PgDn & Numpad7::pgdn7
 ~Pause & Numpad0::tip("Pause热键，未拦截原功能，做热键触发器")
 ScrollLock & Numpad0::tip("ScrollLock热键，拦截原功能，只做热键触发器")
 PrintScreen & Numpad0::tip("PrintScreen热键，拦截原功能，只做热键触发器")
@@ -27,7 +28,11 @@ Insert & Numpad0::tip("Insert热键，拦截原功能，只做热键触发器")
 
 
 
-
+pgdn7(){
+    array := ["abc", "def", "pzn", "ghi"]
+    ; arr_in(array, "pzn")
+    arr_del(array, "pzn")
+}
 
 
 /*
