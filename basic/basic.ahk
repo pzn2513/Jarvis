@@ -22,14 +22,30 @@ NumpadHome::tip(7) ;+Numpad7
 NumpadUp::tip(8) ;+Numpad8
 NumpadPgUp::tip(9) ;+Numpad9
 PgDn & Numpad0::tip("PgDn热键，拦截原功能，只做热键触发器")
+PgDn & Numpad4::pgdn4
+PgDn & Numpad5::pgdn5
+PgDn & Numpad6::pgdn6
 PgDn & Numpad7::pgdn7
 PgDn & Numpad8::pgdn8
 ~Pause & Numpad0::tip("Pause热键，未拦截原功能，做热键触发器")
 ScrollLock & Numpad0::tip("ScrollLock热键，拦截原功能，只做热键触发器")
 PrintScreen & Numpad0::tip("PrintScreen热键，拦截原功能，只做热键触发器")
 Insert & Numpad0::tip("Insert热键，拦截原功能，只做热键触发器")
-
-
+pgdn4(){
+    ; 记住当前窗口和鼠标位置，点去再回来
+    mouse_spy()
+    tip mX " " mY " " wId " "
+    WinActivate "原神 ahk_class UnityWndClass"
+    click
+    WinActivate wId
+    click mX,mY,0
+}
+pgdn5(){
+    tip 5
+}
+pgdn6(){
+    tip 6
+}
 pgdn7(){
     comm_write("通过comm与其他程序通信")
 }
