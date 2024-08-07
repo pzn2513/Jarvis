@@ -125,11 +125,11 @@
 拿命验收_M2HDD(){
     ; m档案架-》HDD
     WinActivate "绝区零 ahk_class UnityWndClass"
-    waitpix 1775,896,0xFFFFFF,0,1,()=>sendstd(["esc","LBUTTON"]),500
+    waitpix 1775,896,0xFFFFFF,0,1,()=>sendstd(["esc","LBUTTON"]),700
     sendstd "m"
     click 976,451,0
     mwaitpix [[849,642,0x000000],[1070,648,0x5D5D5D]],0,1,()=>send("{WheelDown}"),800
-    click 507,985
+    mwaitpix [[849,642,0x000000],[1070,648,0x5D5D5D]],0,-1,()=>click(507,985)
     waitpix 1775,896,0xFFFFFF,0,1,()=>Click(1030,622)
     sendstd "d",50,1300
     sendstd "s",50,700
