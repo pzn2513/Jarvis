@@ -3,22 +3,25 @@
 ~^Numpad1::拿命验收循环()
 ~^0::拿命验收循环()
 ~^Numpad2::零号刷特殊区域()
-~AppsKey & Numpad0::test_func_select()
-~AppsKey & Numpad1::test_mwaitpix()
+~AppsKey & Numpad0::t0()
+~AppsKey & Numpad1::t1()
 ; #Numpad0::ttt()
 #HotIf
 #Include 零号业绩.ahk
 #Include 拿命验收.ahk
 
-test_func_select(){
-    arr:=[
-        [()=>getpix(952,792,0xFFFFFF),()=>tip(111)], 
-        [()=>getpix(1291,363,0x343334),()=>tip(222)],
-        [()=>getpix(1273,257,0x343534),()=>tip(333)],
-    ]
-    func_select(arr)
+t0(){
+    res:=mwaitpix([[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,1,,100,2000)
+    ; res:=mwaitpix([[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]])
+    ; tip "零号业绩"
+    ; if(res=="timeout"){
+    ;     global 零号业绩已达上限:=true
+    ;     tip "零号业绩已达上限"
+    ; }else{
+    ;     mwaitpix [[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,-1,()=>click(1157,319) ;业绩
+    ; }
 }
-test_mwaitpix(){
+t1(){
     arr:=[
         [1278,458,0xFAAB2A],
         [1383,569,0xA71700],

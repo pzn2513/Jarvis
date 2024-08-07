@@ -1,5 +1,10 @@
-﻿零号业绩循环(){
+﻿零号业绩已达上限:=false
+零号业绩循环(){
     loop{
+        if(零号业绩已达上限){
+            msgbox "零号业绩已达上限,结束循环"
+            break
+        }
         零号业绩()
     }
 }
@@ -66,7 +71,7 @@
     */
     func_select([
         [()=>getpix(210,46,0xE3E3E3),()=>start_minghui(true)],
-        [()=>getpix(210,46,0x4F4F4F),()=>start_minghui(false)],
+        [()=>mgetpix([[210,46,0x4F4F4F],[1310,349,0xFAFAFA]]),()=>start_minghui(false)],
     ],1)
     start_minghui(minghui){
         if(minghui){
@@ -100,10 +105,7 @@
     sendstd "d"
     waitpix 952,792,0xFFFFFF,0 ;选择鸣徽
     waitpix 952,792,0xFFFFFF,0,-2,()=>click(952,792) ;选择鸣徽
-    sleep 600
-    sendstd "d"
-    sendstd "w"
-    sendstd "w"
+    waitpix 1270,470,0xFFAF2A,0,1,()=>click(1334,145) ;关键进展，之前
     零号业绩_battle()
     零号业绩_get_reward()
 }
@@ -118,9 +120,7 @@
     sendstd "s"
     waitpix 952,792,0xFFFFFF,0 ;选择鸣徽
     waitpix 952,792,0xFFFFFF,0,-2,()=>click(952,792) ;选择鸣徽
-    sleep 600
-    sendstd "d"
-    sendstd "d"
+    waitpix 1270,470,0xFFAF2A,0,1,()=>click(1333,813) ;关键进展，之前
     零号业绩_battle()
     零号业绩_get_reward()
 }
@@ -132,14 +132,18 @@
     waitpix 1563,963,0x979697,0 ;战斗开始 灰色闪避
     loop{
         零号业绩_shark_fight()
+        if(getpix(850,622,0x00CC0D)){ ;提示周期内达到上限
+            click 900,622
+            sleep 300
+        }
         if(getpix(560,309,0x41C01D)){ ;战斗结束 绿球 有调查点 有奖励
-            waitpix 560,309,0x41C01D,0,-3,()=>click(1136,970)
+            waitpix 560,309,0x41C01D,0,-3,()=>click(1136,920) ;970
             break
         }else if(getpix(560,266,0x44C41C)){ ;战斗结束 绿球 无调查点 有奖励
-            waitpix 560,266,0x44C41C,0,-3,()=>click(1136,970)
+            waitpix 560,266,0x44C41C,0,-3,()=>click(1136,920)
             break 
         }else if(getpix(560,373,0x41C01D)){ ;战斗结束 绿球 无调查点 无奖励
-            waitpix 560,373,0x41C01D,0,-3,()=>click(1136,970)
+            waitpix 560,373,0x41C01D,0,-3,()=>click(1136,920)
             break 
         }
         sleep 100
@@ -183,9 +187,12 @@
     WinActivate("绝区零 ahk_class UnityWndClass")
     waitpix 1291,363,0x343334,0 ;s门对话框
     waitpix 1291,363,0x343334,0,-5,()=>click(1291,363) ;s门对话框
-    sleep 1200
-    sendstd "d"
-    sendstd "w"
+    res:=mwaitpix([[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,1,,100,2000)
+    if(res=="timeout"){
+        global 零号业绩已达上限:=true
+    }else{
+        mwaitpix [[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,-1,()=>click(1157,319) ;业绩
+    }
     零号业绩_giveup()
 }
 零号业绩_giveup(){

@@ -49,11 +49,11 @@
     Click "R D"
     Sleep 300
     Send "{d Down}"
-    Sleep 1500
+    Sleep 1350
     Send "{d Up}"
     Sleep 1200
     Send "{d Down}"
-    res:=waitpix(969,815,0xFFFFFF,0,1,()=>sendstd("f",100),100,10000) ;完成
+    res:=waitpix(969,815,0xFFFFFF,0,3,()=>sendstd("f",100),100,10000) ;完成
     Send "{d Up}"
     Sleep 10
     Send "{w Up}"
