@@ -131,9 +131,9 @@
     mwaitpix [[849,642,0x000000],[1070,648,0x5D5D5D]],0,1,()=>send("{WheelDown}"),800
     mwaitpix [[849,642,0x000000],[1070,648,0x5D5D5D]],0,-1,()=>click(507,985)
     waitpix 1775,896,0xFFFFFF,0,1,()=>Click(1030,622)
-    sendstd "d",50,1300
-    sendstd "s",50,700
-    sendstd "d",50,300
+    sendstd "d",20,1300
+    sendstd "s",20,700
+    sendstd "d",20,400
     res:=waitpix(1236, 52, 0xE4CC00,6,1,()=>sendstd("f"),100,2000)
     if(res=="timeout"){
         拿命验收_M2HDD()
