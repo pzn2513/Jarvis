@@ -1,6 +1,8 @@
 ﻿#Requires AutoHotkey v2.0
+; #NoTrayIcon
 #include "basic_spy.ahk"
 #include "basic_tool.ahk"
+#include "basic_comm.ahk"
 DetectHiddenWindows True
 InstallKeybdHook
 InstallMouseHook ;检测不到罗技鼠标更多的按键
@@ -21,20 +23,19 @@ NumpadUp::tip(8) ;+Numpad8
 NumpadPgUp::tip(9) ;+Numpad9
 PgDn & Numpad0::tip("PgDn热键，拦截原功能，只做热键触发器")
 PgDn & Numpad7::pgdn7
+PgDn & Numpad8::pgdn8
 ~Pause & Numpad0::tip("Pause热键，未拦截原功能，做热键触发器")
 ScrollLock & Numpad0::tip("ScrollLock热键，拦截原功能，只做热键触发器")
 PrintScreen & Numpad0::tip("PrintScreen热键，拦截原功能，只做热键触发器")
 Insert & Numpad0::tip("Insert热键，拦截原功能，只做热键触发器")
 
 
-
 pgdn7(){
-    array := ["abc", "def", "pzn", "ghi"]
-    ; arr_in(array, "pzn")
-    arr_del(array, "pzn")
+    comm_write("通过comm与其他程序通信")
 }
-
-
+pgdn8(){
+    tip comm_read()
+}
 /*
 一些工具函数
 */
