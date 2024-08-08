@@ -1,1 +1,25 @@
 2024-08-08 08:58:25 on line 85: Parameter #1 of ToolTip requires a String, but received an Array.
+2024-08-08 13:24:21 on line 31: This value of type "Float" has no property named "steps".
+2024-08-08 13:24:21 on line 31: Value not enumerable.
+2024-08-08 13:24:27 on line 31: This value of type "Float" has no property named "steps".
+2024-08-08 13:24:27 on line 31: Value not enumerable.
+2024-08-08 13:24:28 on line 31: This value of type "Float" has no property named "steps".
+2024-08-08 13:24:28 on line 31: Value not enumerable.
+2024-08-08 13:26:00 on line 52: This value of type "Float" has no property named "steps".
+2024-08-08 13:26:00 on line 52: Value not enumerable.
+2024-08-08 13:26:01 on line 52: This value of type "Float" has no property named "steps".
+2024-08-08 13:26:01 on line 52: Value not enumerable.
+2024-08-08 16:14:17 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:17 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:17 on line 222: This global variable has not been assigned a value.
+2024-08-08 16:14:18 on line 222: This global variable has not been assigned a value.
+2024-08-08 16:14:18 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:23 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:25 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:25 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:27 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:27 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:32 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:51 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:52 on line 185: This global variable has not been assigned a value.
+2024-08-08 16:14:58 on line 185: This global variable has not been assigned a value.

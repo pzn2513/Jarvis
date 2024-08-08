@@ -1,5 +1,5 @@
-global mX,mY,mColor,wId,wX,wY,wW,wH,wTitle,wClass,wExe,wPath
-global cId,cX,cY,cW,cH,cTitle,cClass,cExe,cPath,hide_id
+global mX,mY,mColor,wId,wX,wY,wW,wH,wTitle,wClass,wExe,wPath ;鼠标获取的
+global cId,cX,cY,cW,cH,cTitle,cClass,cExe,cPath,hide_id ;当前客户端（激活窗口)获取的
 hide_id:=""
 mouse_spy_bool := false
 CoordMode_RelativeTo:= "Client" ; Screen , Window , Client(default)
