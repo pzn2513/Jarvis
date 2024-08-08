@@ -9,7 +9,7 @@
             ; tip 2222
             拿命验收_shafa()
         }else{
-            if(count>25){
+            if(count>30){
                 ; tip 3333
                 拿命验收_M2HDD() 
             }
