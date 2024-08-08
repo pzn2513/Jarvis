@@ -23,3 +23,5 @@
 2024-08-08 16:14:51 on line 185: This global variable has not been assigned a value.
 2024-08-08 16:14:52 on line 185: This global variable has not been assigned a value.
 2024-08-08 16:14:58 on line 185: This global variable has not been assigned a value.
+2024-08-08 17:30:30 on line 105: (5) ¾Ü¾ø·ÃÎÊ¡£
+2024-08-08 17:30:30 on line 106: (5) ¾Ü¾ø·ÃÎÊ¡£
