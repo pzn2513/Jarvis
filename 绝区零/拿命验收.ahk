@@ -63,7 +63,7 @@
     Sleep 10
     Click "R U"    
     if(res=="timeout"){
-        waitpix 1594,1027,0xCB0000,0,1,()=>sendstd("esc") ;放弃
+        waitpix 1594,1027,0xCB0000,0,1,()=>sendstd("esc"),500 ;放弃
         click(1594,1027)
         waitpix 1120,627,0xF8F8F8,0 ;确认
         click(1120,627)

@@ -1,5 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
 ; #NoTrayIcon
+#include "basic_error.ahk"
 #include "basic_spy.ahk"
 #include "basic_tool.ahk"
 #include "basic_comm.ahk"
@@ -9,6 +10,7 @@ InstallMouseHook ;检测不到罗技鼠标更多的按键
 KeyHistory 500
 ^ESC::ExitApp()
 ~^s::Reload()
+
 ~PrintScreen & ScrollLock::mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来
 NumpadIns::w_hide_show() ;+Numpad0
@@ -33,24 +35,68 @@ PrintScreen & Numpad0::tip("PrintScreen热键，拦截原功能，只做热键�
 Insert & Numpad0::tip("Insert热键，拦截原功能，只做热键触发器")
 pgdn4(){
     ; 记住当前窗口和鼠标位置，点去再回来
-    mouse_spy()
-    tip mX " " mY " " wId " "
-    WinActivate "原神 ahk_class UnityWndClass"
-    click
-    WinActivate wId
-    click mX,mY,0
+    ; 处理原神 星铁 绝区零的选项，尽量不影响办公，轻松过剧情
+    ; 目前先放3屏，后续做灵活兼容
+    A_CoordModeToolTip:="Screen"
+    A_CoordModePixel:="Screen"
+    A_CoordModeMouse:="Screen"
+    loop{
+        ; 5137,567,0xFFFFFF
+        ; 5137,641,0xFFFFFF
+        ; 5137,715,0xFFFFFF
+        if(mgetpix([[5137,790,0xFFFFFF],[5129,802,0x5E6670,10]])){
+            ; 对话选项
+            ; block_click(5210,577)
+            ; block_click(5210,651)
+            ; block_click(5210,725)
+            block_click(5210,800)
+        }else if(mgetpix([[4774,966,0xAE8708],[4798,1004,0x110600]])){
+            ; 点击后继续
+            block_click(4804,599)
+        }
+        sleep 1000
+    }
 }
 pgdn5(){
-    tip 5
+    t:=A_TickCount
+    loop 100{
+        WinActivate "原神 ahk_class UnityWndClass"
+    }
+    msgbox A_TickCount-t
+    ; 11125/100=111ms id唤起
+    ; 11297/100=113ms class唤起，相差不大
 }
 pgdn6(){
-    tip 6
+    block_send()
 }
 pgdn7(){
     comm_write("通过comm与其他程序通信")
 }
 pgdn8(){
     tip comm_read()
+}
+block_send(){
+    ; ctrl+alt+del可解除
+    mouse_spy()
+    tip mX " " mY " " wId " "
+    BlockInput true
+    WinActivate "原神 ahk_class UnityWndClass"
+    sendstd "LBUTTON"
+    WinActivate wId
+    click mX,mY,0
+    BlockInput false
+}
+block_click(x,y){
+    ; ctrl+alt+del可解除
+    mouse_spy(0)
+    ; tip mX " " mY " " wId " "
+    BlockInput true
+    MouseMove x,y,0
+    sendstd "LBUTTON"
+    ; sendstd "LBUTTON",10,10
+    WinActivate wId
+    MouseMove mX,mY,0
+    BlockInput false
 }
 /*
 一些工具函数
@@ -83,7 +129,8 @@ func_select(arr,keep_appear_times:=1){
 getpix(x,y,color,similar:=0){
     PixelSearch &fx, &fy, x, y, x, y, color, similar
     if(fx!=""){
-        return [x,y,color]
+        ; return [x,y,color]
+        return true
     }else{
         return
     }

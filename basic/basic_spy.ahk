@@ -91,11 +91,11 @@ mspy_saveClipboard(ThisHotkey){
     A_Clipboard := mX "," mY "," mColor
     mouse_spy_exe()
 }
-mouse_spy(RelativeTo := "Client") {
+mouse_spy(dotip:=true,RelativeTo := "Client") {
     ; CoordMode不使用默认就是Client，适合大多数情况
-    CoordMode("Mouse", CoordMode_RelativeTo)
+    ; CoordMode("Mouse", CoordMode_RelativeTo)
     ; CoordMode("ToolTip", CoordMode_RelativeTo)
-    CoordMode("Pixel", CoordMode_RelativeTo)
+    ; CoordMode("Pixel", CoordMode_RelativeTo)
     global mX,mY,mColor,wId,wX,wY,wW,wH,wTitle,wClass,wExe,wPath
     MouseGetPos(&mX, &mY, &wId)
     mColor := PixelGetColor(mX, mY, "RGB")
@@ -114,6 +114,8 @@ mouse_spy(RelativeTo := "Client") {
     . "进程名: " wExe "`n"
     . "路径: " wPath "`n"
     lines := 8
+    if !dotip
+        return
     if(wExe!="AutoHotkey64.exe"){
         if(mY+wY>1000-18*lines){ ; 根据行数动态调整
             Tooltip(text, mX+15, mY-15-18*lines)
