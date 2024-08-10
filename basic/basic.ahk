@@ -4,13 +4,15 @@
 #include "basic_spy.ahk"
 #include "basic_tool.ahk"
 #include "basic_comm.ahk"
+SetNumLockState "AlwaysOn" ; 锁定NumLock状态
 DetectHiddenWindows True
 InstallKeybdHook
 InstallMouseHook ;检测不到罗技鼠标更多的按键
 KeyHistory 500
 ^ESC::ExitApp()
-~^s::Reload()
-
+#HotIf GetKeyState("s", "P") ;ctrl+s+d Reload
+^d::Reload()
+#HotIf
 ~PrintScreen & ScrollLock::mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来
 NumpadIns::w_hide_show(0) ;+Numpad0
