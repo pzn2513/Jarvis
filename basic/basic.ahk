@@ -13,7 +13,7 @@ KeyHistory 500
 
 ~PrintScreen & ScrollLock::mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来
-NumpadIns::w_hide_show() ;+Numpad0
+NumpadIns::w_hide_show(0) ;+Numpad0
 NumpadEnd::w_move(1) ;+Numpad1
 NumpadDown::w_move(2) ;+Numpad2
 NumpadPgdn::w_move(3) ;+Numpad3
@@ -35,19 +35,13 @@ PrintScreen & Numpad0::tip("PrintScreen热键，拦截原功能，只做热键�
 Insert & Numpad0::tip("Insert热键，拦截原功能，只做热键触发器")
 
 pgdn4(){
-    if tool_debug
-        ToolTip "func_select",0,0,2
-        sleep 2000
-        ToolTip "",0,0,2
+    tip hide_ids
 }
 pgdn5(){
-    t:=A_TickCount
-    loop 100{
-        WinActivate "原神 ahk_class UnityWndClass"
-    }
-    msgbox A_TickCount-t
-    ; 11125/100=111ms id唤起
-    ; 11297/100=113ms class唤起，相差不大
+    clr := {}
+    for n, component in ["red", "green", "blue"]
+        clr.%component% := Random(0, 255)
+    MsgBox clr.red "," clr.green "," clr.blue
 }
 pgdn6(){
     block_send()
@@ -81,6 +75,3 @@ block_click(x,y){
     MouseMove mX,mY,0
     BlockInput false
 }
-
-
-

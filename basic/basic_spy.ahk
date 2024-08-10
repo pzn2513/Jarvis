@@ -3,15 +3,16 @@ global cId,cX,cY,cW,cH,cTitle,cClass,cExe,cPath,hide_id ;当前客户端（激�
 hide_id:=""
 mouse_spy_bool := false
 CoordMode_RelativeTo:= "Client" ; Screen , Window , Client(default)
-w_hide_show(){
-    global hide_id
-    if(hide_id){
-        WinShow(hide_id)
-        hide_id:=""
+hide_ids:={}
+w_hide_show(signal){
+    global hide_ids
+    if(hide_ids.HasProp(signal)){
+        WinShow(hide_ids.%signal%)
+        hide_ids.DeleteProp(signal)
     }else{
         client_spy()
+        hide_ids.%signal%:=cId 
         WinHide(cId)
-        hide_id:=cId    
     }
 }
 w_move(num) {

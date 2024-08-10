@@ -236,7 +236,109 @@ msgbox_autoclose(msg,delay:=1000){
     SetTimer(() => WinClose("ahk_class #32770"), -delay)
     MsgBox msg
 }
-tip(message,delay:=3000){
-    ToolTip message
-    SetTimer ()=>ToolTip(),-delay
+tip(message,delay:=3000,id:=1){
+    message:=obj2json(message)
+    message:=format_json(message)
+    ToolTip message,,,id
+    SetTimer ()=>ToolTip(,,,id),-delay
+}
+RepeatString(str, count) {
+    repeatedStr := ""
+    Loop count {
+        repeatedStr .= str
+    }
+    return repeatedStr
+}
+; 生成标准紧凑的 JSON 字符串
+obj2json(obj){
+    if !IsObject(obj) {
+        if IsNumber(obj) {
+            return obj  ; 如果是数字，直接返回
+        } else {
+            return '"' obj '"'  ; 如果是字符串，返回加引号的字符串
+        }
+    }
+
+    json := ""
+    if obj is Array {
+        json := "["
+        for value in obj {
+            json .= obj2json(value) ","
+        }
+        json := RegExReplace(json, ",$", "")
+        json .= "]"
+    } else {
+        json := "{"
+        for key, value in obj.OwnProps() {
+            json .= '"' key '":' obj2json(value) ","
+        }
+        json := RegExReplace(json, ",$", "")
+        json .= "}"
+    }
+    return json
+}
+
+; 函数：将紧凑的 JSON 字符串转换为带换行和缩进的格式
+format_json(json, indent_str := "    ") {
+    if json=="{}"
+        return "{}"
+    if json=="[]"
+        return "[]"
+    formatted_json := ""
+    indent := 0
+    in_string := false
+    Loop Parse, json
+    {
+        char := A_LoopField
+        if (char = '"') {
+            in_string := !in_string
+        }
+        if (!in_string) {
+            if (char = '{' || char = '[') {
+                indent += 1
+                formatted_json .= char "`n" RepeatString(indent_str, indent)
+                continue
+            } else if (char = '}' || char = ']') {
+                indent -= 1
+                formatted_json := RTrim(formatted_json) "`n" RepeatString(indent_str, indent)
+                formatted_json .= char
+                continue
+            } else if (char = ',') {
+                formatted_json .= char "`n" RepeatString(indent_str, indent)
+                continue
+            } else if (char = ':') {
+                formatted_json .= char " "
+                continue
+            }
+        }
+        formatted_json .= char
+    }
+    return formatted_json
+}
+; 示例对象tool_json
+tool_json := {
+    name: "John",
+    age: 30,
+    address: {
+        city: "New York",
+        street: "5th Ave",
+        details: {
+            zip: "10001",
+            state: "NY"
+        }
+    },
+    phones: ["123-4567", "987-6543"],
+    preferences: {
+        contact: "email",
+        language: "English",
+        notifications: {
+            email: true,
+            sms: false,
+            color:[
+                "red",
+                "green",
+                "blue"
+            ]
+        }
+    }
 }
