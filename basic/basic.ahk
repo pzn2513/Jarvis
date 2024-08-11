@@ -10,9 +10,10 @@ InstallKeybdHook
 InstallMouseHook ;检测不到罗技鼠标更多的按键
 KeyHistory 500
 ^ESC::ExitApp()
-#HotIf GetKeyState("s", "P") ;ctrl+s+d Reload
+#HotIf GetKeyState("s", "P") ;ctrl+s+d Reload  不过远程连接不灵
 ^d::Reload()
 #HotIf
+^+!d::Reload() ;ctrl+shift+s+d Reload
 ~PrintScreen & ScrollLock::mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来
 NumpadIns::w_hide_show(0) ;+Numpad0
