@@ -3,7 +3,7 @@
     count:=0
     res:=mwaitfunc([
         [()=>getpix(1236, 52, 0xE4CC00, 6),()=>waitpix(1236, 52, 0xE4CC00, 6,-4,()=>click(921,667))],
-        [()=>getpix(1512, 1023, 0x1B1B1B, 6),()=>拿命验收_shafa],
+        [()=>getpix(1512, 1023, 0x1B1B1B, 6),拿命验收_shafa],
     ],"识别位置",1,,200,6000)
     if(res=="timeout"){
         拿命验收_M2HDD()
@@ -62,7 +62,7 @@
         waitpix 1690,1030,0xFFFFFF,0,1,()=>click(1511,662) ;完成
         waitpix 1690,1030,0xFFFFFF,0,-25,()=>click(1720,1030) ;完成
     }
-    Sleep 4500
+    Sleep 4000
     拿命验收()
 }
 
@@ -85,32 +85,6 @@
     }else{
         拿命验收()
     }
-    ; Send "{d Down}"
-    ; Sleep 94
-    ; Send "{s Down}"
-    ; Sleep 406
-    ; Send "{a Down}"
-    ; Sleep 16
-    ; Send "{d Up}"
-    ; Sleep 406
-    ; Send "{d Down}"
-    ; Sleep 16
-    ; Send "{a Up}"
-    ; Sleep 400
-    ; Send "{f Down}"
-    ; Sleep 171
-    ; Send "{f Up}"
-    ; Sleep 157
-    ; Send "{f Down}"
-    ; Sleep 125
-    ; Send "{f Up}"
-    ; Sleep 125
-    ; Send "{f Down}"
-    ; Sleep 200
-    ; Send "{f Up}"
-    ; Send "{s Up}"
-    ; Send "{d Up}"
-    ; Sleep 600    
 }
 
 拿命验收_M2HDD(){
