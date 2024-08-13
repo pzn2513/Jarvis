@@ -154,13 +154,7 @@
     click(1490,734)
     sleep 100
     waitpix 1577,130,0xB83736,32,3,()=>click(961,807) ; s门
-    sleep 300
-    click(1577,130)
-    零号业绩_get_reward1()
-}
-零号业绩_get_reward1(){
-    WinActivate("绝区零 ahk_class UnityWndClass")
-    waitpix 1291,363,0x343334,6 ;s门对话框
+    waitpix 1291,363,0x343334,6,2,()=>click(1577,130) ;s门对话框
     waitpix 1291,363,0x343334,6,-5,()=>click(1291,363) ;s门对话框
     res:=mwaitpix([[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,1,,100,2000)
     if(res=="timeout"){
@@ -168,7 +162,7 @@
     }else{
         mwaitpix [[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,-1,()=>click(1157,319) ;业绩
     }
-    零号业绩_giveup()
+    零号业绩_giveup()    
 }
 零号业绩_giveup(){
     waitpix 1594,1027,0xCB0000,6,1,()=>sendstd("esc") ;
