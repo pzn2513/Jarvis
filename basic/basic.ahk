@@ -13,19 +13,14 @@ KeyHistory 500
 #HotIf GetKeyState("s", "P") ;ctrl+s+d Reload  不过远程连接不灵
 ^d::Reload()
 #HotIf
-^+!d::Reload() ;ctrl+shift+s+d Reload
+^+!d::Reload() ;ctrl+shift+alt+d Reload
 ~PrintScreen & ScrollLock::mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来
 NumpadIns::w_hide_show(0) ;+Numpad0
 NumpadEnd::w_move(1) ;+Numpad1
 NumpadDown::w_move(2) ;+Numpad2
 NumpadPgdn::w_move(3) ;+Numpad3
-NumpadLeft::help原神() ;+Numpad4
-NumpadClear::help星铁() ;+Numpad5
-NumpadRight::tip(6) ;+Numpad6
-NumpadHome::tip(7) ;+Numpad7
-NumpadUp::tip(8) ;+Numpad8
-NumpadPgUp::tip(9) ;+Numpad9
+
 PgDn & Numpad0::tip("PgDn热键，拦截原功能，只做热键触发器")
 PgDn & Numpad4::pgdn4
 PgDn & Numpad5::pgdn5

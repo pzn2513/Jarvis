@@ -1,21 +1,12 @@
 ﻿拿命验收(){
     WinActivate "绝区零 ahk_class UnityWndClass"
     count:=0
-    loop{
-        if(getpix(1236, 52, 0xE4CC00, 6)){ ;HDD首页 黄球
-            waitpix(1236, 52, 0xE4CC00, 6,-4,()=>click(921,667)) ;点到消失
-            break
-        }else if(getpix(1512, 1023, 0x1B1B1B, 6)){ ; 累了 对话框边框
-            ; tip 2222
-            拿命验收_shafa()
-        }else{
-            if(count>30){
-                ; tip 3333
-                拿命验收_M2HDD() 
-            }
-        }
-        count++
-        sleep 200
+    res:=mwaitfunc([
+        [()=>getpix(1236, 52, 0xE4CC00, 6),()=>waitpix(1236, 52, 0xE4CC00, 6,-4,()=>click(921,667))],
+        [()=>getpix(1512, 1023, 0x1B1B1B, 6),()=>拿命验收_shafa],
+    ],"识别位置",1,,200,5000)
+    if(res=="timeout"){
+        拿命验收_M2HDD()
     }
     waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
     if(getpix(1142,845,0xF4F4F4)){

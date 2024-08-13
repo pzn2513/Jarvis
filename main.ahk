@@ -4,6 +4,12 @@
 #include "./星铁/星铁.ahk"
 
 /* 在此自定义实用快捷键 */
+NumpadLeft::help原神() ;+Numpad4
+NumpadClear::help星铁() ;+Numpad5
+NumpadRight::tip(6) ;+Numpad6
+NumpadHome::tip(debug_json) ;+Numpad7
+NumpadUp::tip(8) ;+Numpad8
+NumpadPgUp::tip(9) ;+Numpad9
 !esc::w_hide_show("esc")
 !f1::tip(1)
 !f2::tip(2)

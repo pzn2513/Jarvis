@@ -2,67 +2,12 @@
 一些工具函数
 */
 tool_debug:=true
-func_select(arr,keep_appear_times:=1){
-    if tool_debug
-        ToolTip "func_select " arr[1][1] "," arr[1][2],0,0,2
-    ; 传入二维数组arr,[[判断函数，执行函数],...]
-    reset_arr:=zeros(arr.Length)
-    count_arr:=reset_arr
-    loop{
-        for k,v in arr{
-            if(v[1]()){
-                if(count_arr[k]==0){
-                    count_arr:=reset_arr
-                    count_arr[k]:=count_arr[k]+1
-                }else{
-                    count_arr[k]:=count_arr[k]+1
-                }
-                if(count_arr[k]>=keep_appear_times){
-                    tip "func_select执行: " k
-                    if(v.Has(2)){
-                        v[2]() 
-                    }
-                    if tool_debug
-                        ToolTip "",0,0,2
-                    return k
-                }
-            }
-        }
-        sleep 100
-    }
-}
-getpix(x,y,color,similar:=0){
-    PixelSearch &fx, &fy, x, y, x, y, color, similar
-    if(fx!=""){
-        ; return [x,y,color]
-        return true
-    }else{
-        return
-    }
-}
-mgetpix(arr){
-    ; arr:=[[1317, 226, 0x3C3A44,6], [1381, 224, 0x313B49,6]]
-    ; arr:=[[1320,884,0x222022,6], [2344,888,0x672337,6]]
-    find:=[]
-    for k,v in arr{
-        if(!v.Has(4)){
-            v.push(0)
-        }
-        PixelSearch &fx, &fy, v[1], v[2], v[1], v[2], v[3], v[4]
-        if(fx!=""){
-            find.push(v)
-        }
-    }
-    if(find.length==arr.length){
-        return find
-    }else{
-        return
-    }
-}
-waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100,timeout:=0){
+debug_json:=""
+waitpix(x,y,color,similar:=0,appear_times:=1,fn:=()=>{},interval:=100,timeout:=0){
+    StartTime := A_TickCount
     if tool_debug
         ToolTip "waitpix " x "," y,0,0,2
-    StartTime := A_TickCount
+        global debug_json:="waitpix: " x "," y "," color "," similar "," appear_times
     num:=0
     loop{
         PixelSearch &fx, &fy, x, y, x, y, color, similar
@@ -91,7 +36,7 @@ waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100,time
                 num:=0
             }
         }
-        function()
+        fn()
         sleep interval
         if(timeout>0 && A_TickCount-StartTime>timeout){
             if tool_debug
@@ -101,11 +46,12 @@ waitpix(x,y,color,similar:=0,appear_times:=1,function:=()=>{},interval:=100,time
     }
 }
 ; waitpix如果容易误判的，就用mwaitpix加多几个pix增强可信度
-mwaitpix(arr,correct_offset:=0,appear_times:=1,function:=()=>{},interval:=100,timeout:=0){
+mwaitpix(arr,correct_offset:=0,appear_times:=1,fn:=()=>{},interval:=100,timeout:=0){
+    StartTime := A_TickCount
     if tool_debug
         ToolTip "mwaitpix " arr[1][1] "," arr[1][2],0,0,2
-    ; arr:=[[x,y,color,similar],...]
-    StartTime := A_TickCount
+        global debug_json:="mwaitpix: " obj2json(arr)
+    ; arr:=[[x,y,color,similar],...] 
     num:=0
     loop{
         correct:=[]
@@ -144,7 +90,7 @@ mwaitpix(arr,correct_offset:=0,appear_times:=1,function:=()=>{},interval:=100,ti
                 num:=0
             }
         }
-        function() ;可以为""不会报错
+        fn() ;可以为""不会报错
         sleep interval
         if(timeout>0 && A_TickCount-StartTime>timeout){
             if tool_debug
@@ -153,6 +99,73 @@ mwaitpix(arr,correct_offset:=0,appear_times:=1,function:=()=>{},interval:=100,ti
         }
     }
 }
+mwaitfunc(arr,note,appear_times:=1,fn:=fn:=()=>{},interval:=100,timeout:=0){
+    ; 因为arr是一组闭包函数，ahk无法打印其内容，用note告知其作用
+    StartTime := A_TickCount
+    if tool_debug
+        ToolTip "mwaitfunc:" note,0,0,2
+        global debug_json:="mwaitfunc:" note
+    ; 传入二维数组arr,[[判断函数，执行函数],...]
+    reset_arr:=zeros(arr.Length)
+    count_arr:=reset_arr
+    loop{
+        for k,v in arr{
+            if(v[1]()){
+                if(count_arr[k]==0){
+                    count_arr:=reset_arr
+                    count_arr[k]:=count_arr[k]+1
+                }else{
+                    count_arr[k]:=count_arr[k]+1
+                }
+                if(count_arr[k]>=appear_times){
+                    tip "mwaitfunc执行: " k
+                    if(v.Has(2)){
+                        v[2]() 
+                    }
+                    if tool_debug
+                        ToolTip "",0,0,2
+                    return k
+                }
+            }
+        }
+        fn() ;可以为""不会报错
+        sleep interval
+        if(timeout>0 && A_TickCount-StartTime>timeout){
+            if tool_debug
+                ToolTip "",0,0,2
+            return "timeout"
+        }
+    }
+}
+getpix(x,y,color,similar:=0){
+    PixelSearch &fx, &fy, x, y, x, y, color, similar
+    if(fx!=""){
+        ; return [x,y,color]
+        return true
+    }else{
+        return
+    }
+}
+mgetpix(arr){
+    ; arr:=[[1317, 226, 0x3C3A44,6], [1381, 224, 0x313B49,6]]
+    ; arr:=[[1320,884,0x222022,6], [2344,888,0x672337,6]]
+    find:=[]
+    for k,v in arr{
+        if(!v.Has(4)){
+            v.push(0)
+        }
+        PixelSearch &fx, &fy, v[1], v[2], v[1], v[2], v[3], v[4]
+        if(fx!=""){
+            find.push(v)
+        }
+    }
+    if(find.length==arr.length){
+        return find
+    }else{
+        return
+    }
+}
+
 
 arr_in(arr,val){
     for v in arr{
