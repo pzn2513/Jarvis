@@ -118,7 +118,7 @@ mwaitfunc(arr,note,appear_times:=1,fn:=fn:=()=>{},interval:=100,timeout:=0){
                     count_arr[k]:=count_arr[k]+1
                 }
                 if(count_arr[k]>=appear_times){
-                    tip "mwaitfunc执行: " k
+                    tip note ": " k
                     if(v.Has(2)){
                         v[2]() 
                     }
