@@ -267,11 +267,12 @@ RepeatString(str, count) {
 ; 生成标准紧凑的 JSON 字符串
 obj2json(obj){
     if !IsObject(obj) {
-        if IsNumber(obj) {
-            return obj  ; 如果是数字，直接返回
-        } else {
-            return '"' obj '"'  ; 如果是字符串，返回加引号的字符串
-        }
+        return obj  ; 如果不是对象，直接返回
+        ; if IsNumber(obj) {
+        ;     return obj  ; 如果是数字，直接返回
+        ; } else {
+        ;     return '"' obj '"'  ; 如果是字符串，返回加引号的字符串
+        ; }
     }
 
     json := ""

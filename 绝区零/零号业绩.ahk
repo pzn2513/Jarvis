@@ -49,7 +49,7 @@
     temp_func(){
         click(1734,1027)
         Sleep 100
-        click(1110,626)
+        click(1169,627)
     }
     /* 
     开场有鸣徽
@@ -117,7 +117,7 @@
     mwaitfunc([
         [()=>getpix(560,309,0x41C01D),()=>waitpix(560,309,0x41C01D,6,-3,()=>click(1136,920))],
         [()=>getpix(560,266,0x44C41C),()=>waitpix(560,266,0x44C41C,6,-3,()=>click(1136,998))],
-        [()=>getpix(560,373,0x41C01D),()=>waitpix(560,373,0x41C01D,6,-3,()=>click(1136,998))],
+        [()=>getpix(560,373,0x41C01D),()=>waitpix(560,373,0x41C01D,6,-3,()=>click(1136,892))],
     ],"战斗",1,零号业绩_shark_fight)
     waitpix 952,792,0xFFFFFF,6 ;选择鸣徽
     waitpix 952,792,0xFFFFFF,6,-2,()=>click(980,792) ;选择鸣徽
@@ -153,7 +153,7 @@
     sleep 100
     click(1490,734)
     sleep 100
-    waitpix 1577,130,0xB83736,10,6,()=>click(961,807) ; s门
+    waitpix 1577,130,0xB83736,32,3,()=>click(961,807) ; s门
     sleep 300
     click(1577,130)
     零号业绩_get_reward1()
@@ -162,19 +162,18 @@
     WinActivate("绝区零 ahk_class UnityWndClass")
     waitpix 1291,363,0x343334,6 ;s门对话框
     waitpix 1291,363,0x343334,6,-5,()=>click(1291,363) ;s门对话框
-    res:=mwaitpix([[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],6,1,,100,2000)
+    res:=mwaitpix([[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,1,,100,2000)
     if(res=="timeout"){
         global 零号业绩已达上限:=true
     }else{
-        mwaitpix [[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],6,-1,()=>click(1157,319) ;业绩
+        mwaitpix [[1084,311,0x6C54A1,16],[1222,307,0x775FB4,16]],0,-1,()=>click(1157,319) ;业绩
     }
     零号业绩_giveup()
 }
 零号业绩_giveup(){
-    waitpix 1594,1027,0xCB0000,6,1,()=>sendstd("esc") ;放弃
-    click(1594,1027)
-    waitpix 1120,627,0xF8F8F8,6 ;确认
-    click(1120,627)
+    waitpix 1594,1027,0xCB0000,6,1,()=>sendstd("esc") ;
+    waitpix 1120,627,0xF8F8F8,6,1,()=>click(1594,1027),300 ;确认前,点放弃
+    waitpix 1120,627,0xF8F8F8,6,-1,()=>click(1120,627),300 ;确认
     waitpix 1690,1030,0xFFFFFF,6 ;完成
     waitpix 1690,1030,0xFFFFFF,6,-15,()=>click(1600,1030) ;完成
     sleep 3000
