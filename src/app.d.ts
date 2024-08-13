@@ -8,6 +8,7 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+	var ipcRenderer: IpcRenderer;
 }
 
 export {};
