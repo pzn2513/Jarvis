@@ -54,11 +54,11 @@
 }
 零号业绩_start(){
     WinActivate("绝区零 ahk_class UnityWndClass")
-    waitpix 665,700,0x7838CE,0 ;主界面
-    waitpix 665,700,0x7838CE,0,-2,()=>click(700,700) ;主界面
-    waitpix 1632,380,0xADE105,0 ;列车2
+    waitpix 665,700,0x7838CE,6 ;主界面
+    waitpix 665,700,0x7838CE,6,-2,()=>click(700,700) ;主界面
+    waitpix 1632,380,0xADE105,6 ;列车2
     click(1632,380)
-    waitpix 1704,1027,0xFFFFFF,0,-10,()=>temp_func() ;确认-出战
+    waitpix 1704,1027,0xFFFFFF,6,-10,()=>temp_func() ;确认-出战
     temp_func(){
         click(1734,1027)
         Sleep 100
