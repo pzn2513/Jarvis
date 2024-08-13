@@ -89,33 +89,31 @@
     tip "零号业绩_上路"
     ; sendstd "alt"
     sendstd "r",800,800
-    waitpix 952,792,0xFFFFFF,0,1,()=>sendstd("d") ;选择鸣徽
-    waitpix 952,792,0xFFFFFF,0,-2,()=>click(952,792) ;选择鸣徽
-    waitpix 1270,470,0xFFAF2A,0,1,()=>click(1334,145) ;关键进展，之前
+    waitpix 952,792,0xFFFFFF,6,1,()=>sendstd("d") ;选择鸣徽
+    waitpix 952,792,0xFFFFFF,6,-2,()=>click(952,792) ;选择鸣徽
+    waitpix 1270,470,0xFFAF2A,6,1,()=>click(1334,145) ;关键进展，之前
     零号业绩_battle()
     零号业绩_get_reward()
 }
 零号业绩_下路(){
     WinActivate("绝区零 ahk_class UnityWndClass")
     tip "零号业绩_下路"
-    ; sendstd "alt"
-    sendstd "s"
-    waitpix 1291,363,0x343334,0 ;聊天框
-    waitpix 1376,679,0xD9D8D9,0,1,()=>click(1476,679) ;不用支援
-    waitpix 1376,679,0xD9D8D9,0,-13,()=>click(1476,679) ;不用支援
+    waitpix 1291,363,0x343334,6,1,()=>sendstd("s") ;聊天框
+    waitpix 1376,679,0xD9D8D9,6,1,()=>click(1476,679) ;不用支援
+    waitpix 1376,679,0xD9D8D9,6,-13,()=>click(1476,679) ;不用支援
     sendstd "r",800,800
-    waitpix 952,792,0xFFFFFF,0,1,()=>sendstd("s") ;选择鸣徽
-    waitpix 952,792,0xFFFFFF,0,-2,()=>click(952,792) ;选择鸣徽
-    waitpix 1270,470,0xFFAF2A,0,1,()=>click(1333,813) ;关键进展，之前
+    waitpix 952,792,0xFFFFFF,6,1,()=>sendstd("s") ;选择鸣徽
+    waitpix 952,792,0xFFFFFF,6,-2,()=>click(952,792) ;选择鸣徽
+    waitpix 1270,470,0xFFAF2A,6,1,()=>click(1333,813) ;关键进展，之前
     零号业绩_battle()
     零号业绩_get_reward()
 }
 零号业绩_battle(){
-    waitpix 1366,572,0xD9D8D9,0 ;确认继续
-    waitpix 1366,572,0xD9D8D9,0,-2,()=>click(1466,572) ;确认继续
+    waitpix 1366,572,0xD9D8D9,6 ;确认继续
+    waitpix 1366,572,0xD9D8D9,6,-2,()=>click(1466,572) ;确认继续
     Sleep 5000
     WinActivate("绝区零 ahk_class UnityWndClass")
-    waitpix 1563,963,0x979697,0 ;战斗开始 灰色闪避
+    waitpix 1563,963,0x979697,6 ;战斗开始 灰色闪避
     mwaitfunc([
         [()=>getpix(560,309,0x41C01D),()=>waitpix(560,309,0x41C01D,0,-3,()=>click(1136,920))],
         [()=>getpix(560,266,0x44C41C),()=>waitpix(560,266,0x44C41C,0,-3,()=>click(1136,998))],
