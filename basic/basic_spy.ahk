@@ -32,7 +32,8 @@ mouse_spy_exe(){
         SetTimer(mouse_spy, 100)
         ; Hotkey("alt",mspy_changeCoord,"On")
         ; Hotkey("alt up",mspy_changeCoord,"On")
-        Hotkey("*RButton up",mspy_saveClipboard,"On")
+        ; Hotkey("*RButton up",mspy_saveClipboard,"On") ;鼠标右键按下可能会移动鼠标造成误差
+        Hotkey("*Numpad0",mspy_saveClipboard,"On")
         Hotkey("Up",mspy_up,"On")
         Hotkey("Down",mspy_down,"On")
         Hotkey("Right",mspy_right,"On")
@@ -46,7 +47,8 @@ mouse_spy_exe(){
         ToolTip
         ; Hotkey("alt",mspy_changeCoord,"Off")
         ; Hotkey("alt up",mspy_changeCoord,"Off")
-        Hotkey("*RButton up",mspy_saveClipboard,"Off")
+        ; Hotkey("*RButton up",mspy_saveClipboard,"Off")
+        Hotkey("*Numpad0",mspy_saveClipboard,"Off")
         Hotkey("Up",mspy_up,"Off")
         Hotkey("Down",mspy_down,"Off")
         Hotkey("Right",mspy_right,"Off")
