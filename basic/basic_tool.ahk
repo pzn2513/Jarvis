@@ -137,7 +137,8 @@ mwaitfunc(arr,note,appear_times:=1,fn:=fn:=()=>{},interval:=100,timeout:=0){
         }
     }
 }
-getpix(x,y,color,similar:=0){
+getpix(x,y,color,similar:=6){
+    ; 默认能接受一定误差
     PixelSearch &fx, &fy, x, y, x, y, color, similar
     if(fx!=""){
         ; return [x,y,color]
@@ -152,14 +153,14 @@ mgetpix(arr){
     find:=[]
     for k,v in arr{
         if(!v.Has(4)){
-            v.push(0)
+            v.push(6) ; 默认能接受一定误差
         }
         PixelSearch &fx, &fy, v[1], v[2], v[1], v[2], v[3], v[4]
         if(fx!=""){
             find.push(v)
         }
     }
-    tip find
+    ; tip find
     if(find.length==arr.length){
         return find
     }else{
