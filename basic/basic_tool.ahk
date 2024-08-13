@@ -159,6 +159,7 @@ mgetpix(arr){
             find.push(v)
         }
     }
+    tip find
     if(find.length==arr.length){
         return find
     }else{
