@@ -194,6 +194,7 @@ zeros(num) {
 }
 sendstd(key,delay:=150,keeppress:=30){
     if(is_arr(key)){
+        ; 例子：sendstd(["RButton","LButton","Space"],50,30)
         key_unup:=[]
         stddelay:=keeppress
         for k,v in key{
@@ -201,7 +202,6 @@ sendstd(key,delay:=150,keeppress:=30){
                 sleep v
                 stddelay:=0
             }else{
-                
                 if(arr_in(key_unup,v)){
                     arr_del(key_unup,v)
                     send "{" v " Up}"

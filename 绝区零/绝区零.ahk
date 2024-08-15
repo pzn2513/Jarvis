@@ -5,6 +5,21 @@
 ~^Numpad2::零号刷特殊区域()
 ~AppsKey & Numpad0::t0()
 ~AppsKey & Numpad1::t1()
+Space::sendstd(["RButton","LButton","Space"],25,25) ;闪a 空
+c::sendstd(["RButton","LButton","c"],25,25) ;闪a c
+; RButton::前向闪避() ;闪a 空
+; RButton Up::前向闪避up() ;闪a 空
+; 前向闪避(){
+;     send "{w Down}"
+;     ; sleep 30
+;     send "{RButton Down}"
+; }
+; 前向闪避up(){
+;     send "{w Up}"
+;     ; sleep 30
+;     send "{RButton Up}"   
+; }
+; RButton::sendstd("w") ;闪a 空
 ; #Numpad0::ttt()
 #HotIf
 #Include 零号业绩.ahk
