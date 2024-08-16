@@ -99,7 +99,7 @@
     click 976,451,0
     Sleep 1000
     ; m入场的时候会有纯黑
-    mwaitpix [[849,642,0x000000],[1054,666,0xFFFFFF]],0,1,()=>send("{WheelDown}"),1000
+    mwaitpix [[849,642,0x000000],[1054,666,0xFFFFFF]],0,1,()=>send("{WheelUp}"),1000
     mwaitpix [[849,642,0x000000],[1054,666,0xFFFFFF]],0,-1,()=>click(550,985)
     waitpix 1775,896,0xFFFFFF,0,1,()=>Click(1030,622)
     sendstd "d",20,1300

@@ -180,7 +180,6 @@ arr_del(arr,val){
     for i,v in arr{
         if(v==val){
             arr.RemoveAt(i)
-            printarr_2d(arr)
             return true
         }
     }
@@ -225,24 +224,6 @@ sendstd(key,delay:=150,keeppress:=30){
         send "{" key " Up}"
         sleep delay        
     }
-}
-printarr_2d(arr:=[["hello","world"],["this is printarr_2d","default"]]){
-    if(!is_arr(arr)){
-        tip "is not array"
-        return
-    }
-    output:= ""
-    for k,v in arr{
-        if(is_arr(v)){
-            for k1,v1 in v{
-                output .= v1 ","
-            }
-            output .= "`n"            
-        }else{
-            output .= v ","
-        }
-    }
-    tip output
 }
 is_arr(var) {
     return IsObject(var) && var.HasProp("Length")
