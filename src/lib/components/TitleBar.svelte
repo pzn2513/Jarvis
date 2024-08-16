@@ -1,28 +1,32 @@
 <script lang="ts">
-  import type { IpcRenderer } from 'electron';
+  import type { IpcRenderer } from "electron";
 
   let ipcRenderer: IpcRenderer | undefined;
 
-  if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
+  if (
+    typeof window !== "undefined" &&
+    window.process &&
+    window.process.type === "renderer"
+  ) {
     // 仅在Electron环境中导入
-    ipcRenderer = window.require('electron').ipcRenderer;
+    ipcRenderer = window.require("electron").ipcRenderer;
   }
 
   function minimize() {
-    if (ipcRenderer) ipcRenderer.send('window-control', 'minimize');
+    if (ipcRenderer) ipcRenderer.send("window-control", "minimize");
   }
 
   function maximize() {
-    if (ipcRenderer) ipcRenderer.send('window-control', 'maximize');
+    if (ipcRenderer) ipcRenderer.send("window-control", "maximize");
   }
 
   function close() {
-    if (ipcRenderer) ipcRenderer.send('window-control', 'close');
+    if (ipcRenderer) ipcRenderer.send("window-control", "close");
   }
 </script>
 
 <div class="title-bar">
-  <div class="title">页面与主进程通信 → </div>
+  <div class="title">页面与主进程通信 →</div>
   <div class="window-controls">
     <button on:click={minimize}>—</button>
     <button on:click={maximize}>□</button>
