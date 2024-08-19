@@ -10,23 +10,12 @@
 ~AppsKey & Numpad1:: t1()
 Space:: sendstd(["RButton", "LButton", "Space"], 25, 25) ;闪a 空
 c:: sendstd(["RButton", "LButton", "c"], 25, 25) ;闪a c
-; RButton::前向闪避() ;闪a 空
-; RButton Up::sendstd("LButton") ;闪a 空
-; 前向闪避(){
-;     send "{w Down}"
-;     ; sleep 30
-;     send "{RButton Down}"
-; }
-; 前向闪避up(){
-;     send "{w Up}"
-;     ; sleep 30
-;     send "{RButton Up}"
-; }
-; RButton::sendstd("w") ;闪a 空
-; #Numpad0::ttt()
+Delete::zzz_discard()
 #HotIf
 
-
+zzz_discard(){
+    block_click(1744,52,0)
+}
 t0() {
     mwaitfunc([
         [() => mgetpix([[1440, 67, 0x353C44, 16], [1319, 226, 0xF63C3D, 32]])],

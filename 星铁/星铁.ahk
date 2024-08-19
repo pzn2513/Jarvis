@@ -1,4 +1,11 @@
 ﻿#include "../basic/basic.ahk"
+#HotIf WinActive("星穹铁道 ahk_class UnityWndClass")
+Delete::星铁弃置()
+#HotIf
+
+星铁弃置(){
+    block_click(1861,252,0)
+}
 help星铁() {
     A_CoordModeToolTip := "Screen"
     A_CoordModePixel := "Screen"

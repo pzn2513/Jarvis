@@ -37,6 +37,7 @@ help原神() {
     }
 }
 spin() {
+    ; 龙王旋转
     global spin_stop := false
     Loop 500 { ;过转保护
         DllCall("mouse_event", "UInt", 0x0001, "Int", 1000, "Int", 0, "UInt", 0, "Int", 0)

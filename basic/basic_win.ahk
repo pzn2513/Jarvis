@@ -1,3 +1,11 @@
+/************************************************************************
+ * @file basic_win.ahk
+ * @author Ghini
+ * @description 窗口相关操作
+ * 窗口检测，隐藏，移动，置顶等
+ ***********************************************************************/
+
+
 global mX,mY,mColor,wId,wX,wY,wW,wH,wTitle,wClass,wExe,wPath ;鼠标获取的
 global cId,cX,cY,cW,cH,cTitle,cClass,cExe,cPath,hide_id ;当前客户端（激活窗口)获取的
 hide_id:=""
@@ -33,7 +41,8 @@ mouse_spy_exe(){
         ; Hotkey("alt",mspy_changeCoord,"On")
         ; Hotkey("alt up",mspy_changeCoord,"On")
         ; Hotkey("*RButton up",mspy_saveClipboard,"On") ;鼠标右键按下可能会移动鼠标造成误差
-        Hotkey("*Numpad0",mspy_saveClipboard,"On")
+        Hotkey("*Numpad0 Up",mspy_saveClipboard,"On")
+        Hotkey("*RButton Up",mspy_saveClipboard,"On")
         Hotkey("Up",mspy_up,"On")
         Hotkey("Down",mspy_down,"On")
         Hotkey("Right",mspy_right,"On")
@@ -48,7 +57,8 @@ mouse_spy_exe(){
         ; Hotkey("alt",mspy_changeCoord,"Off")
         ; Hotkey("alt up",mspy_changeCoord,"Off")
         ; Hotkey("*RButton up",mspy_saveClipboard,"Off")
-        Hotkey("*Numpad0",mspy_saveClipboard,"Off")
+        Hotkey("*Numpad0 Up",mspy_saveClipboard,"Off")
+        Hotkey("*RButton Up",mspy_saveClipboard,"Off")
         Hotkey("Up",mspy_up,"Off")
         Hotkey("Down",mspy_down,"Off")
         Hotkey("Right",mspy_right,"Off")
@@ -145,4 +155,34 @@ client_spy(title:="A"){
     . "进程名: " cExe "`n"
     . "路径: " cPath "`n"
     ; tip(text)
+}
+global ontop_GUIs := {}
+w_top_toggle() {
+    ; 创建红点 GUI
+    hwnd := WinExist("A")
+    ; 未置顶则置顶，已置顶则取消状态
+    if ((WinGetExStyle(hwnd) & 0x8) == 0) { ;0x8 窗口置顶的位掩码（Bitmask）
+        WinSetAlwaysOnTop 1, hwnd
+        ontop_GUIs.%hwnd% := Gui("+AlwaysOnTop -Caption +ToolWindow")
+        ontop_GUIs.%hwnd%.BackColor := "Red"
+        ontop_GUIs.%hwnd%.Opt("+E0x20")  ; 点击穿透
+        ; 获取活动窗口信息并定位红点
+        ontop_GUIs.%hwnd%.timer := () => PositionDot(ontop_GUIs.%hwnd%)
+        SetTimer(ontop_GUIs.%hwnd%.timer, 10)
+    } else {
+        WinSetAlwaysOnTop 0, hwnd
+        if (ontop_GUIs.HasOwnProp(hwnd)) {
+            SetTimer(ontop_GUIs.%hwnd%.timer, 0)
+            ontop_GUIs.%hwnd%.Destroy()
+            ontop_GUIs.DeleteProp(hwnd)
+        }
+    }
+    PositionDot(GUI) {
+        ; 窗口是激活的渲染显示，没激活不用管。
+        if (WinActive(hwnd)) {
+            WinGetPos(&actX, &actY, &actW, &actH, hwnd)
+            GUI.Show(Format("x{} y{} w8 h8 NoActivate", actX + actW - 15, actY + 0))
+            WinSetAlwaysOnTop 1, GUI.Hwnd
+        }
+    }
 }
