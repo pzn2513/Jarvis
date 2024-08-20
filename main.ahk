@@ -62,7 +62,7 @@ NumpadPgUp::tip(9) ;+Numpad9
 #i:: tip("#i")
 #u:: tip("#u")
 #y:: tip("#y")
-#t:: tip("#t")
+#t:: w_top_toggle()
 #w:: tip("#w")
 #q:: tip("#q")
 #backspace:: tip("#backspace")

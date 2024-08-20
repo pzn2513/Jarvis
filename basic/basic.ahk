@@ -43,7 +43,7 @@ pgdn5() {
     tip ontop_GUIs
 }
 pgdn6() {
-    block_send()
+    tip "pgdn6"
 }
 pgdn7() {
     comm_write("通过comm与其他程序通信")

@@ -3,25 +3,16 @@
 */
 tool_debug := true
 debug_json := ""
-block_send() {
-    ; ctrl+alt+del可解除
-    mouse_spy()
-    tip mX " " mY " " wId " "
-    BlockInput true
-    WinActivate "原神 ahk_class UnityWndClass"
-    sendstd "LBUTTON", 40, 0
-    WinActivate wId
-    click mX, mY, 0
-    BlockInput false
-}
 block_click(x, y, cross := 1) {
-    ; ctrl+alt+del可解除 cross 是否跨应用
+    ; 卡鼠标或卡按键 ctrl+alt+del可解除 
+    ; cross 是否跨应用
     if (cross) {
+        hwnd:=WinExist("A")
         mouse_spy(0)
         BlockInput true
         MouseMove x, y, 0
         sendstd "LBUTTON", 40, 0
-        WinActivate wId
+        WinActivate hwnd
     } else {
         BlockInput true
         MouseGetPos(&mX, &mY, &wId)
