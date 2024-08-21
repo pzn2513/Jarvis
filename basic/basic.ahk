@@ -10,7 +10,7 @@ InstallKeybdHook
 InstallMouseHook ;检测不到罗技鼠标更多的按键
 KeyHistory 500
 ^ESC:: ExitApp()
-^backspace:: Reload()
+^+AppsKey:: Reload()
 #HotIf WinActive('ahk ahk_class Chrome_WidgetWin_1')
 ~^s:: Reload()
 #HotIf
