@@ -184,7 +184,7 @@ mgetpix(arr) {
     if (find.length == arr.length) {
         return find
     } else {
-        return
+        return 0
     }
 }
 
@@ -255,9 +255,9 @@ msgbox_autoclose(msg, delay := 1000) {
 global new_tips := 0
 tip(message, delay := 3000, id := 1) {
     global new_tips += 1
-    ; if(IsObject(message)){
-    ;     message := obj2json(message)
-    ; }
+    if(IsObject(message)){
+        message := obj2json(message)
+    }
     message := format_json(message)
     ToolTip message, , , id
     fn() {

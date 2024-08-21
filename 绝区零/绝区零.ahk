@@ -4,8 +4,8 @@
 #HotIf WinActive("绝区零 ahk_class UnityWndClass")
 ~^Numpad0:: 零号业绩循环()
 ~^Numpad1:: 拿命验收()
-~^0:: 拿命验收()
-~^Numpad2:: 零号刷特殊区域()
+~^0:: 零号业绩循环()
+~^1:: 拿命验收()
 ~AppsKey & Numpad0:: t0()
 ~AppsKey & Numpad1:: t1()
 Space:: sendstd(["RButton", "LButton", "Space"], 25, 25) ;闪a 空
@@ -17,17 +17,14 @@ zzz_discard(){
     block_click(1744,52,0)
 }
 t0() {
-    mwaitfunc([
-        [() => mgetpix([[1440, 67, 0x353C44, 16], [1319, 226, 0xF63C3D, 32]])],
-        [() => mgetpix([[1429, 903, 0x1A2028, 16], [1321, 886, 0xEB2429, 32]])],
-    ], "路线分析")
+    res:=mwaitpix([
+        [1455,345,0x8A61A4,16],
+        [1475,420,0x2D363D,16],
+    ],0,1,,100)
+    tip res
 }
 t1() {
-    sendstd ["esc", "LBUTTON"]
-    ; send "{esc Down}{sleep 100}{esc Up}"
-    ; send "{esc Down}"
-    ; sleep 30
-    ; send "{esc Up}"
+    tip 11111
 }
 ; ttt(){
 ;     InstallKeybdHook
