@@ -6,17 +6,16 @@
 #include "basic_comm.ahk"
 SetNumLockState "AlwaysOn" ; 锁定NumLock状态
 DetectHiddenWindows True
-InstallKeybdHook
-InstallMouseHook ;检测不到罗技鼠标更多的按键
-KeyHistory 500
+; InstallKeybdHook
+; InstallMouseHook ;检测不到罗技鼠标更多的按键
+; KeyHistory 500
 ^ESC:: ExitApp()
 ^+AppsKey:: Reload()
 #HotIf WinActive('ahk ahk_class Chrome_WidgetWin_1')
 ~^s:: Reload()
 #HotIf
 ^+!s:: Reload() ;ctrl+shift+alt+d Reload
-^+!z:: Pause -1
-^+!x:: Suspend() ;ctrl+shift+alt+z Suspend
+^+!a:: Pause -1
 ~PrintScreen & ScrollLock:: mouse_spy_exe()
 ^+#Left:: mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来 | 这按键和&按键远控不行

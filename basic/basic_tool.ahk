@@ -1,14 +1,19 @@
 /*
 一些工具函数
 */
+#include "basic_win.ahk"
 tool_debug := true
 debug_json := ""
 block_click(x, y, cross := 1) {
     ; 卡鼠标或卡按键 ctrl+alt+del可解除 
     ; cross 是否跨应用
+    global mX, mY, wId
     if (cross) {
         hwnd:=WinExist("A")
         mouse_spy(0)
+        if(!mX){
+            MsgBox "意外：hwnd:" hwnd "，mX:" mX
+        }
         BlockInput true
         MouseMove x, y, 0
         sendstd "LBUTTON", 40, 0
