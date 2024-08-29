@@ -5,6 +5,7 @@
 ~^Numpad0:: 零号业绩循环()
 ~^Numpad1:: 拿命验收()
 ~^0:: 零号业绩循环()
+~^`:: 零号业绩循环()
 ~^1:: 拿命验收()
 ~AppsKey & Numpad0:: t0()
 ~AppsKey & Numpad1:: t1()
