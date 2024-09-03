@@ -1,4 +1,5 @@
-﻿拿命验收() {
+﻿#include "../basic/basic.ahk"
+拿命验收() {
     WinActivate "绝区零 ahk_class UnityWndClass"
     count := 0
     res := mwaitfunc([
@@ -9,7 +10,7 @@
         拿命验收_M2HDD()
     }
     waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
-    if (getpix(1142, 845, 0xF4F4F4)) {
+    if (mgetpix([[1141,599,0xABABAB,6],[1140,599,0x000000,6]])) {
         click 1200, 845
     } else {
         ; MouseClickDrag "left", 1402, 800, 1402, 400 ;上划
