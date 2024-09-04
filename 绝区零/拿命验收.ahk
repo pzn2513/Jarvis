@@ -3,7 +3,8 @@
     WinActivate "绝区零 ahk_class UnityWndClass"
     count := 0
     res := mwaitfunc([
-        [() => getpix(1236, 52, 0xE4CC00, 6), () => waitpix(1236, 52, 0xE4CC00, 6, -4, () => click(921, 667))],
+        ; [() => getpix(1236, 52, 0xE4CC00, 6), () => waitpix(1236, 52, 0xE4CC00, 6, -4, () => click(921, 667))],
+        [() => getpix(1236, 52, 0xE4CC00, 6), () => mwaitpix([[1833,1030,0x313131, 6],[1116,1002,0x313131,6],[1066,1036,0xB5B5B5,6]],0, 1, () => click(921, 667))],
         [() => getpix(1512, 1023, 0x1B1B1B, 6), 拿命验收_shafa],
     ], "识别位置", 1, , 200, 6000)
     if (res == "timeout") {
@@ -71,8 +72,10 @@
     /*
     沙发爬起来继续，点到界面出现
     */
-    WinActivate "绝区零 ahk_class UnityWndClass"
-    waitpix(1777, 897, 0xFFFFFF, 0, 5, () => click())
+    ; WinActivate "绝区零 ahk_class UnityWndClass"
+    ; 觉得有些累了 402,833,0x313031 1168,937,0xFFFFFF  1508,1025,0x1E1F1E
+    waitpix(1777, 897, 0xFFFFFF, 0, 5, () => sendstd("space"))
+    mwaitpix([[1777, 897, 0xFFFFFF, 6],[1809,122,0xF8F8F8,6]],0,2, () => sendstd("space"))
     sendstd "d", 20, 400
     send "{s Down}"
     Sleep 400
@@ -90,7 +93,7 @@
 
 拿命验收_M2HDD() {
     ; m档案架-》HDD
-    WinActivate "绝区零 ahk_class UnityWndClass"
+    ; WinActivate "绝区零 ahk_class UnityWndClass"
     waitpix 1775, 896, 0xFFFFFF, 0, 1, () => tmpfun(), 800
     tmpfun() {
         sendstd(["esc", "LBUTTON"])
