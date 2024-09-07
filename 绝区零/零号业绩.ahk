@@ -1,4 +1,5 @@
-﻿零号业绩已达上限:=false
+﻿#include "../basic/basic.ahk"
+零号业绩已达上限:=false
 零号业绩循环(){
     loop{
         ; if(零号业绩已达上限){
@@ -76,8 +77,8 @@
     WinActivate("绝区零 ahk_class UnityWndClass")
     waitpix 1563,963,0x979697,6 ;战斗开始 灰色闪避
     mwaitfunc([
-        [()=>getpix(1136,1002,0xFFFFFF,6),()=>waitpix(1136,1002,0xFFFFFF,6,-2,()=>click(1100,1002))],
-        [()=>getpix(1151,896,0xFFFFFF,6),()=>waitpix(1151,896,0xFFFFFF,6,-2,()=>click(1100,896))],
+        [()=>getpix(1136,1002,0xFFFFFF,0),()=>waitpix(1136,1002,0xFFFFFF,6,-2,()=>click(1100,1002))],
+        [()=>mgetpix([[1151,896,0xFFFFFF,0],[1019,1017,0x00CC0D,6]]),()=>waitpix(1151,896,0xFFFFFF,6,-2,()=>click(1100,896))],
     ],"战斗",1,零号业绩_shark_fight)
     waitpix 952,792,0xFFFFFF,6 ;选择鸣徽
     waitpix 952,792,0xFFFFFF,6,-2,()=>click(980,792) ;选择鸣徽
@@ -137,7 +138,11 @@
     零号业绩_giveup()    
 }
 零号业绩_giveup(){
-    waitpix 1594,1027,0xCB0000,6,1,()=>sendstd("esc"),200 
+    waitpix 1594,1027,0xCB0000,6,1,tmpfn,300 
+    tmpfn(){
+        click 962,800
+        sendstd("esc")
+    }
     waitpix 1120,627,0xF8F8F8,6,1,()=>click(1594,1027),300 ;确认前,点放弃
     waitpix 1120,627,0xF8F8F8,6,-1,()=>click(1140,627) ;确认
     waitpix 1690,1030,0xFFFFFF,6 ;完成

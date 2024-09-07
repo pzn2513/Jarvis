@@ -18,11 +18,7 @@ zzz_discard(){
     block_click(1744,52,0)
 }
 t0() {
-    res:=mwaitpix([
-        [1455,345,0x8A61A4,16],
-        [1475,420,0x2D363D,16],
-    ],0,1,,100)
-    tip res
+    零号业绩_giveup()
 }
 t1() {
     tip 11111
