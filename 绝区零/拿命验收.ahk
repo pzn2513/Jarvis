@@ -1,6 +1,6 @@
 ﻿#include "../basic/basic.ahk"
 拿命验收() {
-    WinActivate "绝区零 ahk_class UnityWndClass"
+    ; WinActivate "绝区零 ahk_class UnityWndClass"
     count := 0
     res := mwaitfunc([
         ; [() => getpix(1236, 52, 0xE4CC00, 6), () => waitpix(1236, 52, 0xE4CC00, 6, -4, () => click(921, 667))],
@@ -26,7 +26,7 @@
     /*
     打箱子精细操作
     */
-    WinActivate "绝区零 ahk_class UnityWndClass"
+    ; WinActivate "绝区零 ahk_class UnityWndClass"
     waitpix 1563, 963, 0x979697, 0 ;战斗开始 灰色闪避
     Send "{w Down}"
     Sleep 250
