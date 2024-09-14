@@ -11,17 +11,17 @@
 ~AppsKey & Numpad1:: t1()
 Space:: sendstd(["RButton", "LButton", "Space"], 25, 25) ;闪a 空
 c:: sendstd(["RButton", "LButton", "c"], 25, 25) ;闪a c
-Delete::zzz_discard()
+Delete:: zzz_discard()
 #HotIf
 
-zzz_discard(){
-    block_click(1744,52,0)
+zzz_discard() {
+  block_click(1744, 52, 0)
 }
 t0() {
-    零号业绩_giveup()
+  零号业绩_上路()
 }
 t1() {
-    tip 11111
+  零号业绩_容易出错()
 }
 ; ttt(){
 ;     InstallKeybdHook
