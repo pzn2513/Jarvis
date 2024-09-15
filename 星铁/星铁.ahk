@@ -1,6 +1,7 @@
 ﻿#include "../basic/basic.ahk"
 #HotIf WinActive("星穹铁道 ahk_class UnityWndClass")
 Delete::星铁弃置()
+~AppsKey & Numpad0:: t00()
 #HotIf
 
 星铁弃置(){
@@ -28,4 +29,16 @@ help星铁() {
         ; }
         sleep 1000
     }
+}
+t00() {
+  ; waitpix 1757,743,0x4E9E63,16
+  ; click 1676,984
+  loop 9{
+    Sleep 15000
+    mwaitpix [[1455,947,0xF6F6F6],[997,353,0xF0D198]],0,1
+    mwaitpix [[1455,947,0xF6F6F6],[997,353,0xF0D198]],0,-1,()=>click(1217,947)
+    waitpix 1137,673,0xA5977B
+    waitpix 1137,673,0xA5977B,0,-1,()=>click(1180,673)    
+  }
+
 }
