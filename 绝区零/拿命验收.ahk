@@ -116,7 +116,7 @@
   sendstd "d", 20, 1300
   sendstd "s", 20, 700
   sendstd "d", 20, 400
-  res := waitpix(1236, 52, 0xE4CC00, 6, 1, () => sendstd("f"), 100, 2000)
+  res := waitpix(1236, 52, 0xE4CC00, 6, 1, () => sendstd("f"), 100, 5000)
   if (res == "timeout") {
     拿命验收_M2HDD()
   } else {
