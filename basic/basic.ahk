@@ -16,6 +16,7 @@ DetectHiddenWindows True
 #HotIf
 ^+!s:: Reload() ;ctrl+shift+alt+d Reload
 ^+!a:: Pause -1
+; ^+!d:: Suspend
 ~PrintScreen & ScrollLock:: mouse_spy_exe()
 ^+#Left:: mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来 | 这按键和&按键远控不行
