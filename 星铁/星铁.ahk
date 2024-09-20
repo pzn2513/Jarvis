@@ -47,7 +47,7 @@ help星铁() {
     sleep 1200
     click 1608,984
     sleep 1200
-    click 856,540 ; 虚无633,542  记忆418,501  丰饶856,540
+    click 418,501 ; 虚无633,542  记忆418,501  丰饶856,540
     sleep 600
     click 1581,985
     sleep 5000
@@ -97,7 +97,7 @@ help星铁() {
     block_click 1451, 960,0
     sleep 300
     block_click 1162, 671,0
-    sleep 5000
+    sleep 4000
     loop 15 {
       block_click 1716, 1026,0
       sleep 100
