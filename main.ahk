@@ -29,7 +29,7 @@ NumpadPgUp::tip(9) ;+Numpad9
 ; 一些win键没用甚至副作用，拦截掉
 ; 下排
 #AppsKey:: tip("#AppsKey")
-#space:: tip("#space")
+; #space:: tip("#space")
 #/:: tip("#/")
 #.:: tip("#.")
 #,:: tip("#,")

@@ -1,5 +1,6 @@
 ﻿#include "../basic/basic.ahk"
 #HotIf WinActive("星穹铁道 ahk_class UnityWndClass")
+Insert:: 星铁上锁()
 Delete:: 星铁弃置()
 ~AppsKey & Numpad0:: 星铁t0()
 ~AppsKey & Numpad1:: 星铁t1()
@@ -8,7 +9,10 @@ Delete:: 星铁弃置()
 #HotIf
 
 星铁弃置() {
-  block_click(1861, 252, 0)
+  block_click(440,327, 0)
+}
+星铁上锁() {
+  block_click(438,275, 0)
 }
 help星铁() {
   A_CoordModeToolTip := "Screen"
