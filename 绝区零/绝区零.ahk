@@ -3,10 +3,10 @@
 #Include 拿命验收.ahk
 #HotIf WinActive("绝区零 ahk_class UnityWndClass")
 ~^Numpad0:: 零号业绩循环()
-~^Numpad1:: 拿命验收()
+~^Numpad1:: 拿命验收_主循环()
 ~^0:: 零号业绩循环()
 ~^`:: 零号业绩循环()
-~^1:: 拿命验收()
+~^1:: 拿命验收_主循环()
 ~AppsKey & Numpad0:: t0()
 ~AppsKey & Numpad1:: t1()
 Space:: sendstd(["RButton", "LButton", "Space"], 25, 25) ;闪a 空

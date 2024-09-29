@@ -1,15 +1,22 @@
 ﻿#include "../basic/basic.ahk"
+拿命验收_主循环(){
+  ; 删除当前目录下的log.txt
+  filename:="拿命验收log.txt"
+  if (FileExist(filename)) {
+    FileDelete(filename)
+  }
+  times:=0
+  loop{
+    拿命验收()
+    times++
+    ; 写入当前目录log.txt
+    str:=FormatTime(, "yyyy/M/d HH:mm:ss") "    已运行 " times " 轮`n"
+    FileAppend str,filename
+  }
+}
 拿命验收() {
   ; WinActivate "绝区零 ahk_class UnityWndClass"
-  count := 0
-  res := mwaitfunc([
-    [() => getpix(1630, 846, 0xF741A5, 6)],
-    [() => getpix(1236, 52, 0xE4CC00, 6), () => mwaitpix([[1833, 1030, 0x313131, 6], [1116, 1002, 0x313131, 6], [1066, 1036, 0xB5B5B5, 6]], 0, 1, () => click(921, 667))],
-    [() => getpix(1512, 1023, 0x1B1B1B, 6), 拿命验收_shafa],
-  ], "识别位置", 1, , 200, 6000)
-  if (res == "timeout") {
-    拿命验收_M2HDD()
-  }
+  拿命验收_主判()
   waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
   if (mgetpix([[1141, 599, 0xABABAB, 6], [1140, 599, 0x000000, 6]])) {
     click 1200, 845
@@ -66,9 +73,17 @@
   }
   Sleep 4000
   mwaitpix [[100, 100, 0x060606, 6], [100, 1000, 0x060606, 6], [1820, 100, 0x060606, 6], [1820, 800, 0x060606, 6]], 0, -2, , , 4000 ;识别黑幕结束，4s容错
-  拿命验收()
 }
-
+拿命验收_主判(){
+  res := mwaitfunc([
+    [() => getpix(1630, 846, 0xF741A5, 6)],
+    [() => getpix(1236, 52, 0xE4CC00, 6), () => mwaitpix([[1833, 1030, 0x313131, 6], [1116, 1002, 0x313131, 6], [1066, 1036, 0xB5B5B5, 6]], 0, 1, () => click(921, 667))],
+    [() => getpix(1512, 1023, 0x1B1B1B, 6), 拿命验收_shafa],
+  ], "识别位置", 1, , 200, 6000)
+  if (res == "timeout") {
+    拿命验收_M2HDD()
+  }
+}
 拿命验收_shafa() {
   /*
   沙发爬起来继续，点到界面出现
@@ -88,7 +103,7 @@
   if (res == "timeout") {
     拿命验收_M2HDD()
   } else {
-    拿命验收()
+    拿命验收_主判()
   }
 }
 
@@ -120,6 +135,6 @@
   if (res == "timeout") {
     拿命验收_M2HDD()
   } else {
-    拿命验收()
+    拿命验收_主判()
   }
 }
