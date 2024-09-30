@@ -1,32 +1,43 @@
 ﻿#include "../basic/basic.ahk"
-拿命验收_主循环(){
+拿命验收_主循环() {
   ; 删除当前目录下的log.txt
-  filename:="拿命验收log.txt"
+  filename := "拿命验收log.txt"
   if (FileExist(filename)) {
     FileDelete(filename)
   }
-  times:=0
-  loop{
+  times := 0
+  loop {
     拿命验收()
     times++
     ; 写入当前目录log.txt
-    str:=FormatTime(, "yyyy/M/d HH:mm:ss") "    已运行 " times " 轮`n"
-    FileAppend str,filename
+    str := FormatTime(, "yyyy/M/d HH:mm:ss") "    已运行 " times " 轮`n"
+    FileAppend str, filename
   }
 }
 拿命验收() {
   ; WinActivate "绝区零 ahk_class UnityWndClass"
   拿命验收_主判()
   waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
-  if (mgetpix([[1141, 599, 0xABABAB, 6], [1140, 599, 0x000000, 6]])) {
-    click 1200, 845
-  } else {
+  count:=0
+  while (!mgetpix([[1141, 599, 0xABABAB, 6], [1140, 599, 0x000000, 6]])) {
+    ; mgetpix其它辅助点 ,[1123,614,0x5C5C5C,6],[1102,612,0xD1D1D1,6]
     ; MouseClickDrag "left", 1402, 800, 1402, 400 ;上划
-    SendEvent("{Click 1402 888 Down}{click 1402 0 Up}")
+    SendEvent("{Click 1402 880 Down}{click 1402 10 Up}")
     sleep 500
-    waitpix(1141, 599, 0xAAAAAA, 6, 0, () => SendEvent("{Click 1402 800 Down}{click 1402 300 Up}"), 500) ;比input兼容性强
-    click 1334, 599
+    count++
+    if (count > 3) {
+      click 113,50
+      sleep 1500
+      click 1659,58
+      sleep 500
+      click 1659,268
+      sleep 2500
+      count:=0
+      拿命验收_主判()
+      ; break
+    }
   }
+  click 1334, 599
   sleep 100
   click 1719, 1035
   waitpix(1726, 49, 0xcccccc, 6, -25, () => click(1719, 1035), 200) ;队伍
@@ -74,7 +85,7 @@
   Sleep 4000
   mwaitpix [[100, 100, 0x060606, 6], [100, 1000, 0x060606, 6], [1820, 100, 0x060606, 6], [1820, 800, 0x060606, 6]], 0, -2, , , 4000 ;识别黑幕结束，4s容错
 }
-拿命验收_主判(){
+拿命验收_主判() {
   res := mwaitfunc([
     [() => getpix(1630, 846, 0xF741A5, 6)],
     [() => getpix(1236, 52, 0xE4CC00, 6), () => mwaitpix([[1833, 1030, 0x313131, 6], [1116, 1002, 0x313131, 6], [1066, 1036, 0xB5B5B5, 6]], 0, 1, () => click(921, 667))],
@@ -120,7 +131,7 @@
   click 976, 451, 0
   Sleep 500
   ; 所以这里确认是否到地图页面，否则重跑前面
-  res:=mwaitpix([[206,54,0x090909, 6], [212,53,0xB1B1B1, 6],[1611,51,0x020202,6],[1611,54,0xFFFFFF,6]],0,1,,,2000)
+  res := mwaitpix([[206, 54, 0x090909, 6], [212, 53, 0xB1B1B1, 6], [1611, 51, 0x020202, 6], [1611, 54, 0xFFFFFF, 6]], 0, 1, , , 2000)
   if (!res) {
     拿命验收_M2HDD()
   }
