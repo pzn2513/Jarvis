@@ -18,10 +18,15 @@ zzz_discard() {
   block_click(1744, 52, 0)
 }
 t0() {
-  零号业绩_上路()
+  零号业绩_路线分析()
 }
 t1() {
-  零号业绩_容易出错()
+  waitpix 1350, 485, 0xE67772, 24, 1 ; s门
+  waitpix 1359,789,0x296CFC, 6, 1, () => click(1383, 487), 1000 ;s门对话框，前往s门
+  waitpix 1359,789,0x296CFC, 6, -2, () => click(1400,789) ;s门对话框，点掉对白
+  sleep 1000
+  waitpix 1348, 487, 0x1E2629, 10, 3, () => click(1487, 375) ;s门空
+  零号业绩_giveup()
 }
 ; ttt(){
 ;     InstallKeybdHook

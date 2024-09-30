@@ -37,12 +37,16 @@
     }
   }
   ; 分析路线 1316, 225,0x324147
+  零号业绩_路线分析()
+}
+零号业绩_路线分析() {
   mwaitfunc([
-    [() => mgetpix([[1440, 67, 0x353C44, 16], [1319, 226, 0xF63C3D, 32]]),
+    [() => mgetpix([[1258,797,0x6A7882, 24],[1441,144,0x343B46,16]]),
       零号业绩_上路],
-    [() => getpix(1385, 887, 0xEA212C, 32), 零号业绩_下路],
-    [() => getpix(1280, 850, 0xDB2325, 32), 零号业绩_下路],
-  ], "路线分析")
+    [() => mgetpix([[1257,216,0x4D6972, 24],[1423,767,0x2C2530,16]]), 零号业绩_下路],
+    [() => mgetpix([[994,240,0x7E5346, 16],[1380,877,0x223534,16]]), 零号业绩_下路],
+    [() => mgetpix([[1309,163,0x241E1A, 16],[1230,881,0x151E26,16]]), 零号业绩_下路],
+  ], "路线分析")  
 }
 零号业绩_上路() {
   WinActivate("绝区零 ahk_class UnityWndClass")
@@ -53,7 +57,8 @@
   sendstd "r", 500, 500
   waitpix 952, 792, 0xFFFFFF, 6, 1, () => sendstd("d") ;选择鸣徽
   waitpix 952, 792, 0xFFFFFF, 6, -2, () => click(980, 792) ;选择鸣徽
-  waitpix 1270, 470, 0xFFAF2A, 6, 1, () => click(1334, 145) ;关键进展，之前
+  waitpix 1275,442,0xABAAAE,10,1,()=>sendstd("d")
+  waitpix 1384,785,0xC01C00, 6, 1, () => sendstd("w") ;关键进展，之前
   零号业绩_battle()
   零号业绩_get_reward()
 }
@@ -64,18 +69,17 @@
   waitpix 1360, 599, 0x47EB55, 6, 1, () => click(1499, 537) ;接受支援
   waitpix 849, 619, 0x00CC0D, 6, 1, () => click(1499, 537) ;接受支援
   waitpix 849, 619, 0x00CC0D, 6, -2, () => click(974, 623) ;加入队伍
-  waitpix 942, 784, 0xDBB5B8, 16
   Sleep 600
   sendstd "r", 500, 500
   waitpix 952, 792, 0xFFFFFF, 6, 1, () => sendstd("s") ;选择鸣徽
   waitpix 952, 792, 0xFFFFFF, 6, -2, () => click(980, 792) ;选择鸣徽
-  waitpix 1270, 470, 0xFFAF2A, 6, 1, () => click(1333, 813) ;关键进展，之前
+  waitpix 1384,785,0xC01C00, 6, 1, () => sendstd("d") ;关键进展，之前
   零号业绩_battle()
   零号业绩_get_reward()
 }
 零号业绩_battle() {
-  waitpix 1360, 598, 0xD9D8D9, 6 ;确认继续
-  waitpix 1360, 598, 0xD9D8D9, 6, -2, () => click(1466, 572) ;确认继续
+  waitpix 1384,785,0xC01C00, 6 ;进入战斗
+  waitpix 1384,785,0xC01C00, 6, -2, () => click(1484,785) ;进入战斗
   Sleep 5000
   WinActivate("绝区零 ahk_class UnityWndClass")
   waitpix 1563, 963, 0x979697, 6 ;战斗开始 灰色闪避
@@ -127,20 +131,12 @@
   waitpix 210, 49, 0xFCE802, 6, 1, () => fn() ;加速
   ; waitpix 1350,485,0xE67772,20,1,()=>fn() ; s门,点掉对白
   waitpix 1350, 485, 0xE67772, 24, 1 ; s门
-  waitpix 1316, 357, 0xFFFFFF, 6, 1, () => click(1383, 487), 1000 ;s门对话框，前往s门
-  waitpix 1316, 357, 0xFFFFFF, 6, -8, () => click(1291, 363) ;s门对话框，点掉对白
+  waitpix 1359,789,0x296CFC, 6, 1, () => click(1383, 487), 1000 ;s门对话框，前往s门
+  waitpix 1359,789,0x296CFC, 6, -2, () => click(1400,789) ;s门对话框，点掉对白
   sleep 1000
-  waitpix 1348, 487, 0x1E2629, 10, 3, () => click(1487, 375) ;s门空 1489,384,0x141A23
-  ; res:=mwaitpix([
-  ;     [1455,345,0x8A61A4,16],
-  ;     [1475,420,0x2D363D,16],
-  ; ],0,1,,100,2000) ;业绩紫
-  ; if(res=="timeout"){
-  ;     global 零号业绩已达上限:=true
-  ; }else{
-  ;     waitpix 1348,487,0x1E2629,10,3,()=>click(1487,375) ;s门空 1489,384,0x141A23
-  ;     ; mwaitpix [[1455,345,0x8A61A4,16],[1537,356,0xB0A3DA,16]],0,-2,()=>click(1487,375) ;业绩 1489,384,0x141A23
-  ; }
+  sendstd "d"
+  sendstd "w"
+  ; waitpix 1348, 487, 0x1E2629, 10, 4, () => click(1487, 375) ;s门空
   零号业绩_giveup()
 }
 零号业绩_giveup() {
