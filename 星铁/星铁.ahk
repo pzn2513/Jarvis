@@ -2,14 +2,18 @@
 #HotIf WinActive("星穹铁道 ahk_class UnityWndClass")
 Insert:: 星铁上锁()
 Delete:: 星铁弃置()
+End:: 星铁弃置1()
 ~AppsKey & Numpad0:: 星铁t0()
 ~AppsKey & Numpad1:: 星铁t1()
 ^`:: 星铁t0()
 ^1:: 星铁t1()
 #HotIf
 
-星铁弃置() {
+星铁弃置() { ; 背包遗器界面
   block_click(440,327, 0)
+}
+星铁弃置1() { ; 角色装备节界面
+  block_click(1860,255, 0)
 }
 星铁上锁() {
   block_click(438,275, 0)
