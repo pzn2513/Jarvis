@@ -10,8 +10,10 @@
     拿命验收()
     times++
     ; 写入当前目录log.txt
-    str := FormatTime(, "yyyy/M/d HH:mm:ss") "    已运行 " times " 轮`n"
-    FileAppend str, filename
+    Loop Files, "拿命验收*."{
+      FileDelete(A_LoopFilePath)
+    }
+    FileAppend "","拿命验收" times
   }
 }
 拿命验收() {

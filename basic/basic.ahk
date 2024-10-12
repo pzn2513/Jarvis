@@ -1,4 +1,14 @@
 ﻿#Requires AutoHotkey v2.0
+if ( not A_IsAdmin) {
+  try {
+    Run "*RunAs " A_ScriptFullPath  ; 以管理员权限重新运行脚本
+  }
+  catch {
+    MsgBox "An error occurred while attempting to run the script as an administrator."
+    return
+  }
+  ExitApp  ; 退出当前的非管理员实例
+}
 ; #NoTrayIcon
 #include "basic_error.ahk"
 #include "basic_win.ahk"
@@ -39,17 +49,17 @@ Insert & Numpad0:: tip("Insert热键，拦截原功能，只做热键触发器")
 
 
 pgdn4() {
-    w_top_toggle()
+  w_top_toggle()
 }
 pgdn5() {
-    tip ontop_GUIs
+  tip ontop_GUIs
 }
 pgdn6() {
-    tip "pgdn6"
+  tip "pgdn6"
 }
 pgdn7() {
-    comm_write("通过comm与其他程序通信")
+  comm_write("通过comm与其他程序通信")
 }
 pgdn8() {
-    tip comm_read()
+  tip comm_read()
 }
