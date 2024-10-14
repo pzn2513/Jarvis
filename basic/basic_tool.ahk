@@ -216,7 +216,7 @@ zeros(num) {
     }
     return zeroArray
 }
-sendstd(key, delay := 150, keeppress := 30) {
+sendstd(key, delay := 160, keeppress := 40) {
     if (is_arr(key)) {
         ; 例子：sendstd(["RButton","LButton","Space"],50,30)
         key_unup := []

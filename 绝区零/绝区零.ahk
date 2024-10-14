@@ -26,10 +26,10 @@ t0() {
   零号业绩_路线分析()
 }
 t1() {
-  FileAppend "","拿命验收1"
+  零号业绩_giveup()
 }
-t2(){
-  Loop Files, "拿命验收*."{
+t2() {
+  Loop Files, "拿命验收*." {
     FileDelete(A_LoopFilePath)
   }
 }
