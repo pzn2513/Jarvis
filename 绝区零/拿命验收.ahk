@@ -7,13 +7,13 @@
   }
   times := 0
   loop {
-    拿命验收()
-    times++
-    ; 写入当前目录log.txt
-    Loop Files, "拿命验收*."{
-      FileDelete(A_LoopFilePath)
+    if(拿命验收()){
+      times++
+      Loop Files, "拿命验收*."{
+        FileDelete(A_LoopFilePath)
+      }
+      FileAppend "","拿命验收" times      
     }
-    FileAppend "","拿命验收" times
   }
 }
 拿命验收() {
@@ -80,12 +80,14 @@
     waitpix 1594, 1027, 0xCB0000, 0, -2, () => click(1630, 1027)
     waitpix 1120, 627, 0xF8F8F8, 0 ;确认
     waitpix 1120, 627, 0xF8F8F8, 0, -2, () => click(1120, 627) ;确认
+    return 0
   } else {
     waitpix 1690, 1030, 0xFFFFFF, 0, 1, () => click(1511, 662) ;完成
     waitpix 1690, 1030, 0xFFFFFF, 0, -25, () => click(1720, 1030) ;完成
   }
   Sleep 4000
   mwaitpix [[100, 100, 0x060606, 6], [100, 1000, 0x060606, 6], [1820, 100, 0x060606, 6], [1820, 800, 0x060606, 6]], 0, -2, , , 4000 ;识别黑幕结束，4s容错
+  return 1
 }
 拿命验收_主判() {
   res := mwaitfunc([
