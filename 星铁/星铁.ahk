@@ -7,6 +7,7 @@ End:: 星铁弃置1()
 ~AppsKey & Numpad1:: 星铁t1()
 ^`:: 星铁t0()
 ^1:: 星铁t1()
+PgDn & Numpad7::help星铁
 #HotIf
 
 星铁弃置() { ; 背包遗器界面
@@ -27,18 +28,21 @@ help星铁() {
     ; 5137,641,0xFFFFFF
     ; 5137,715,0xFFFFFF
     ToolTip "help星铁", 1920 * 2, 0, 20
-    if (mgetpix([[5088, 758, 0xF1D599], [5180, 757, 0xFFFFFF]])) {
+    if (mgetpix([[5151,756,0xFFFFFF], [5180,756,0xFFFFFF]])) {
       ; 对话选项1
       ; block_click(5210,577)
       ; block_click(5210,651)
       ; block_click(5210,725)
+      send "{alt down}"
+      sleep 200
       block_click(5234, 758)
+      send "{alt up}"
     }
     ; else if(mgetpix([[4774,966,0xAE8708],[4798,1004,0x110600]])){
     ;     ; 点击后继续
     ;     block_click(4804,599)
     ; }
-    sleep 1000
+    sleep 200
   }
 }
 星铁t0() {

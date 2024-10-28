@@ -7,20 +7,21 @@
   }
   times := 0
   loop {
-    if(拿命验收()){
+    if (拿命验收()) {
       times++
-      Loop Files, "拿命验收*."{
+      Loop Files, "拿命验收*." {
         FileDelete(A_LoopFilePath)
       }
-      FileAppend "","拿命验收" times      
+      FileAppend "", "拿命验收" times
     }
+    sleep 4000
   }
 }
 拿命验收() {
   ; WinActivate "绝区零 ahk_class UnityWndClass"
   拿命验收_主判()
   waitpix(1630, 846, 0xF741A5, 6) ;HDD列表
-  count:=0
+  count := 0
   while (!mgetpix([[1141, 599, 0xABABAB, 6], [1140, 599, 0x000000, 6]])) {
     ; mgetpix其它辅助点 ,[1123,614,0x5C5C5C,6],[1102,612,0xD1D1D1,6]
     ; MouseClickDrag "left", 1402, 800, 1402, 400 ;上划
@@ -28,13 +29,13 @@
     sleep 500
     count++
     if (count > 3) {
-      click 113,50
+      click 113, 50
       sleep 1500
-      click 1659,58
+      click 1659, 58
       sleep 500
-      click 1659,268
+      click 1659, 268
       sleep 2500
-      count:=0
+      count := 0
       拿命验收_主判()
       ; break
     }
@@ -76,18 +77,25 @@
   Sleep 10
   Click "R U"
   if (res == "timeout") {
-    waitpix 1594, 1027, 0xCB0000, 0, 1, () => sendstd("esc"), 500 ;放弃
-    waitpix 1594, 1027, 0xCB0000, 0, -2, () => click(1630, 1027)
-    waitpix 1120, 627, 0xF8F8F8, 0 ;确认
-    waitpix 1120, 627, 0xF8F8F8, 0, -2, () => click(1120, 627) ;确认
+    拿命验收_giveup()
     return 0
   } else {
     waitpix 1690, 1030, 0xFFFFFF, 0, 1, () => click(1511, 662) ;完成
     waitpix 1690, 1030, 0xFFFFFF, 0, -25, () => click(1720, 1030) ;完成
   }
-  Sleep 4000
-  mwaitpix [[100, 100, 0x060606, 6], [100, 1000, 0x060606, 6], [1820, 100, 0x060606, 6], [1820, 800, 0x060606, 6]], 0, -2, , , 4000 ;识别黑幕结束，4s容错
+  ; mwaitpix [[100, 100, 0x060606, 6], [100, 1000, 0x060606, 6], [1820, 100, 0x060606, 6], [1820, 800, 0x060606, 6]], 0, -2, , , 4000 ;识别黑幕结束，4s容错
   return 1
+}
+拿命验收_giveup() {
+  waitpix 1594, 1027, 0xCB0000, 0, 1, tmpfn, 500 ;放弃
+  tmpfn(){
+    click 861,796
+    sleep 800
+    sendstd("esc")
+  }
+  waitpix 1594, 1027, 0xCB0000, 0, -2, () => click(1630, 1027)
+  waitpix 1120, 627, 0xF8F8F8, 0 ;确认
+  waitpix 1120, 627, 0xF8F8F8, 0, -2, () => click(1120, 627) ;确认
 }
 拿命验收_主判() {
   res := mwaitfunc([

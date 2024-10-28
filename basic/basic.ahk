@@ -36,12 +36,12 @@ NumpadDown:: w_move(2) ;+Numpad2
 NumpadPgdn:: w_move(3) ;+Numpad3
 
 
-PgDn & Numpad0:: tip("PgDn热键，拦截原功能，只做热键触发器")
-PgDn & Numpad4:: pgdn4
-PgDn & Numpad5:: pgdn5
-PgDn & Numpad6:: pgdn6
-PgDn & Numpad7:: pgdn7
-PgDn & Numpad8:: pgdn8
+; PgDn & Numpad0:: tip("PgDn热键，拦截原功能，只做热键触发器")
+; PgDn & Numpad4:: pgdn4
+; PgDn & Numpad5:: pgdn5
+; PgDn & Numpad6:: pgdn6
+; PgDn & Numpad7:: pgdn7
+; PgDn & Numpad8:: pgdn8
 ~Pause & Numpad0:: tip("Pause热键，未拦截原功能，做热键触发器")
 ScrollLock & Numpad0:: tip("ScrollLock热键，拦截原功能，只做热键触发器")
 PrintScreen & Numpad0:: tip("PrintScreen热键，拦截原功能，只做热键触发器")
@@ -58,8 +58,8 @@ pgdn6() {
   tip "pgdn6"
 }
 pgdn7() {
-  comm_write("通过comm与其他程序通信")
+  tip "pgdn7"
 }
 pgdn8() {
-  tip comm_read()
+  tip "pgdn8"
 }

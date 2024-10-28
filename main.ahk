@@ -4,13 +4,13 @@
 #include "./星铁/星铁.ahk"
 
 /* 在此自定义实用快捷键 */
-NumpadLeft::help原神() ;+Numpad4
-NumpadClear::help星铁() ;+Numpad5
-NumpadRight::tip(6) ;+Numpad6
-NumpadHome::tip(debug_json) ;+Numpad7
-NumpadUp::tip(8) ;+Numpad8
-NumpadPgUp::tip(9) ;+Numpad9
-!esc::w_hide_show("esc")
+NumpadLeft:: help原神() ;+Numpad4
+NumpadClear:: help星铁() ;+Numpad5
+NumpadRight:: tip(6) ;+Numpad6
+NumpadHome:: tip(debug_json) ;+Numpad7
+NumpadUp:: tip(8) ;+Numpad8
+NumpadPgUp:: tip(9) ;+Numpad9
+!esc:: w_hide_show("esc")
 ; !f1::tip(1)
 ; !f2::tip(2)
 ; !f3::tip(3)
@@ -21,13 +21,13 @@ NumpadPgUp::tip(9) ;+Numpad9
 ; !f8::tip(8)
 ; !f9::tip(9)
 ; !f0::tip(0)
-!`::w_hide_show("~")
-!1::w_move(1)
-!2::w_move(2)
-!3::w_move(3)
-!4::tip(4)
-!5::tip(5)
-!6::tip(6)
+!`:: w_hide_show("~")
+!1:: w_move(1)
+!2:: w_move(2)
+!3:: w_move(3)
+!4:: tip(4)
+!5:: tip(5)
+!6:: tip(6)
 ; +f1::tip(1)
 
 ; 一些win键没用甚至副作用，拦截掉
@@ -76,7 +76,7 @@ NumpadPgUp::tip(9) ;+Numpad9
 ; #tab 桌面视图
 #CapsLock:: tip("#CapsLock")
 ; #esc:: tip("#esc")
-; #f1:: tip("#f1")
+#f1:: telegram
 ; #f2:: tip("#f2")
 ; #f3:: tip("#f3")
 ; #f4:: tip("#f4")
@@ -87,4 +87,20 @@ NumpadPgUp::tip(9) ;+Numpad9
 ; #f9:: tip("#f9")
 ; #f10:: tip("#f10")
 ; #f11:: tip("#f11")
-; #f12:: tip("#f12")
+#f12:: telegram
+
+telegram() {
+  hwnd := WinExist("ahk_class Qt51515QWindowIcon")
+  ; tip(hwnd)
+  if (hwnd) {
+    if (WinActive(hwnd)) {
+      WinClose(hwnd)
+    } else {
+      ; WinShow(hwnd)
+      ; WinActivate(hwnd)
+      run "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe"
+    }
+  } else {
+    run "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe"
+  }
+}

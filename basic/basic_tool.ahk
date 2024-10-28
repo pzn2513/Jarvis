@@ -16,14 +16,16 @@ block_click(x, y, cross := 1) {
         }
         BlockInput true
         MouseMove x, y, 0
-        sendstd "LBUTTON", 40, 0
+        ; send "{alt down}"
+        sendstd "LBUTTON", 40, 5
+        ; send "{alt up}"
         WinActivate hwnd
     } else {
         BlockInput true
         MouseGetPos(&mX, &mY, &wId)
         ; click x,y
         MouseMove x, y, 0
-        sendstd "LBUTTON", 40, 0
+        sendstd "LBUTTON", 40, 5
     }
     MouseMove mX, mY, 0
     BlockInput false
