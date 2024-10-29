@@ -60,8 +60,12 @@
   sendstd "r", 500, 500
   waitpix 952, 792, 0xFFFFFF, 6, 1, () => sendstd("d") ;选择鸣徽
   waitpix 952, 792, 0xFFFFFF, 6, -2, () => click(980, 792) ;选择鸣徽
-  waitpix 1275, 442, 0xABAAAE, 20, 1, () => sendstd("d")
-  waitpix 1384, 785, 0xC01C00, 6, 1, () => sendstd("w") ;关键进展，之前
+  ; waitpix 1275, 442, 0xABAAAE, 20, 1, () => sendstd("d")
+  waitpix 1384, 785, 0xC01C00, 6, 1, tmpfn ;关键进展，之前
+  tmpfn(){
+    sendstd("d")
+    sendstd("w")
+  }
   零号业绩_battle()
   零号业绩_get_reward()
 }

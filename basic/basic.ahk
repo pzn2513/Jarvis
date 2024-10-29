@@ -9,6 +9,19 @@ if ( not A_IsAdmin) {
   }
   ExitApp  ; 退出当前的非管理员实例
 }
+SetStartup() ; 在脚本开始时调用开机启动设置函数
+SetStartup()
+{
+  startupFolder := A_Startup
+  scriptPath := A_ScriptFullPath
+  scriptName := A_ScriptName
+  shortcutPath := startupFolder "\" StrReplace(scriptName, ".ahk", ".lnk")
+  if !FileExist(shortcutPath)
+  {
+    FileCreateShortcut(scriptPath, shortcutPath)
+    MsgBox("已将脚本添加到开机启动项。")
+  }
+}
 ; #NoTrayIcon
 #include "basic_error.ahk"
 #include "basic_win.ahk"
