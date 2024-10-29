@@ -77,8 +77,8 @@ NumpadPgUp:: tip(9) ;+Numpad9
 #CapsLock:: tip("#CapsLock")
 ; #esc:: tip("#esc")
 #f1:: telegram
-; #f2:: tip("#f2")
-; #f3:: tip("#f3")
+#f2:: postman
+; #f3:: 
 ; #f4:: tip("#f4")
 ; #f5:: tip("#f5")
 ; #f6:: tip("#f6")
@@ -90,17 +90,30 @@ NumpadPgUp:: tip(9) ;+Numpad9
 #f12:: telegram
 
 telegram() {
-  hwnd := WinExist("ahk_class Qt51515QWindowIcon")
-  ; tip(hwnd)
+  showhide("ahk_class Qt51515QWindowIcon ahk_exe Telegram.exe", "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe")
+}
+postman() {
+  showhide("ahk_exe Postman.exe", "C:\Users\pznfo\AppData\Local\Postman\app-10.24.26\Postman.exe")
+}
+showhide(a, b) {
+  hwnd := WinExist(a)
   if (hwnd) {
-    if (WinActive(hwnd)) {
-      WinClose(hwnd)
+    style := WinGetStyle(hwnd)
+    isVisible := (style & WS_VISIBLE) != 0
+    if (isVisible) {
+      if (WinActive(hwnd)) {
+        WinMinimize(hwnd)
+        return
+      } else {
+        WinRestore(hwnd)
+        WinActivate(hwnd)
+        return
+      }
     } else {
-      ; WinShow(hwnd)
-      ; WinActivate(hwnd)
-      run "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe"
+      ; 对于隐藏在托盘处的窗口，似乎没有很好的办法
     }
-  } else {
-    run "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe"
   }
+  run b
+  sleep 300
+  WinActivate(a)
 }
