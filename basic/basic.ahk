@@ -58,7 +58,7 @@ NumpadPgdn:: w_move(3) ;+Numpad3
 ~Pause & Numpad0:: tip("Pause热键，未拦截原功能，做热键触发器")
 ScrollLock & Numpad0:: tip("ScrollLock热键，拦截原功能，只做热键触发器")
 PrintScreen & Numpad0:: tip("PrintScreen热键，拦截原功能，只做热键触发器")
-Insert & Numpad0:: tip("Insert热键，拦截原功能，只做热键触发器")
+~Insert & Numpad0:: tip("Insert热键，拦截原功能，只做热键触发器")
 
 
 pgdn4() {
