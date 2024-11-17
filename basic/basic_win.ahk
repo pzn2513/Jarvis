@@ -40,16 +40,16 @@ mouse_spy_exe() {
     SetTimer(mouse_spy, 100)
     ; Hotkey("alt",mspy_changeCoord,"On")
     ; Hotkey("alt up",mspy_changeCoord,"On")
-    ; Hotkey("*RButton up",mspy_saveClipboard,"On") ;鼠标右键按下可能会移动鼠标造成误差
-    Hotkey("*F1 Up", mspy_saveClipboard, "On")
-    Hotkey("*F2 Up", mspy_saveClipboard1, "On")
-    Hotkey("*F3 Up", mspy_saveClipboard2, "On")
-    Hotkey("*F4 Up", mspy_saveClipboard3, "On")
-    Hotkey("*Numpad0 Up", mspy_saveClipboard, "On")
-    Hotkey("*Numpad1 Up", mspy_saveClipboard1, "On")
-    Hotkey("*Numpad2 Up", mspy_saveClipboard2, "On")
-    Hotkey("*Numpad3 Up", mspy_saveClipboard3, "On")
-    Hotkey("*RButton Up", mspy_saveClipboard, "On")
+    ; Hotkey("*RButton up",mspy_savePos,"On") ;鼠标右键按下可能会移动鼠标造成误差
+    Hotkey("*F1 Up", mspy_savePos, "On")
+    Hotkey("*F2 Up", mspy_savePath, "On")
+    Hotkey("*F3 Up", mspy_saveClass, "On")
+    Hotkey("*F4 Up", mspy_saveColor, "On")
+    Hotkey("*Numpad0 Up", mspy_savePos, "On")
+    Hotkey("*Numpad1 Up", mspy_savePath, "On")
+    Hotkey("*Numpad2 Up", mspy_saveClass, "On")
+    Hotkey("*Numpad3 Up", mspy_saveColor, "On")
+    Hotkey("*RButton Up", mspy_savePos, "On")
     Hotkey("Up", mspy_up, "On")
     Hotkey("Down", mspy_down, "On")
     Hotkey("Right", mspy_right, "On")
@@ -63,16 +63,16 @@ mouse_spy_exe() {
     ToolTip
     ; Hotkey("alt",mspy_changeCoord,"Off")
     ; Hotkey("alt up",mspy_changeCoord,"Off")
-    ; Hotkey("*RButton up",mspy_saveClipboard,"Off")
-    Hotkey("*F1 Up", mspy_saveClipboard, "Off")
-    Hotkey("*F2 Up", mspy_saveClipboard1, "Off")
-    Hotkey("*F3 Up", mspy_saveClipboard2, "Off")
-    Hotkey("*F4 Up", mspy_saveClipboard3, "Off")
-    Hotkey("*Numpad0 Up", mspy_saveClipboard, "Off")
-    Hotkey("*Numpad1 Up", mspy_saveClipboard1, "Off")
-    Hotkey("*Numpad2 Up", mspy_saveClipboard2, "Off")
-    Hotkey("*Numpad3 Up", mspy_saveClipboard3, "Off")
-    Hotkey("*RButton Up", mspy_saveClipboard, "Off")
+    ; Hotkey("*RButton up",mspy_savePos,"Off")
+    Hotkey("*F1 Up", mspy_savePos, "Off")
+    Hotkey("*F2 Up", mspy_savePath, "Off")
+    Hotkey("*F3 Up", mspy_saveClass, "Off")
+    Hotkey("*F4 Up", mspy_saveColor, "Off")
+    Hotkey("*Numpad0 Up", mspy_savePos, "Off")
+    Hotkey("*Numpad1 Up", mspy_savePath, "Off")
+    Hotkey("*Numpad2 Up", mspy_saveClass, "Off")
+    Hotkey("*Numpad3 Up", mspy_saveColor, "Off")
+    Hotkey("*RButton Up", mspy_savePos, "Off")
     Hotkey("Up", mspy_up, "Off")
     Hotkey("Down", mspy_down, "Off")
     Hotkey("Right", mspy_right, "Off")
@@ -114,19 +114,19 @@ mspy_changeCoord(ThisHotkey) {
     global CoordMode_RelativeTo := "Client"
   }
 }
-mspy_saveClipboard(ThisHotkey) {
+mspy_savePos(ThisHotkey) {
   A_Clipboard := mX "," mY "," mColor
   mouse_spy_exe()
 }
-mspy_saveClipboard1(ThisHotkey) {
+mspy_savePath(ThisHotkey) {
   A_Clipboard := wPath
   mouse_spy_exe()
 }
-mspy_saveClipboard2(ThisHotkey) {
+mspy_saveClass(ThisHotkey) {
   A_Clipboard := wClass
   mouse_spy_exe()
 }
-mspy_saveClipboard3(ThisHotkey) {
+mspy_saveColor(ThisHotkey) {
   A_Clipboard := StrReplace(mColor,"0x","#")
   mouse_spy_exe()
 }

@@ -78,6 +78,7 @@ NumpadPgUp:: tip(9) ;+Numpad9
 ; #esc:: tip("#esc")
 #f1:: telegram
 #f2:: postman
+#f3:: xmind
 ; #f3:: 
 ; #f4:: tip("#f4")
 ; #f5:: tip("#f5")
@@ -94,6 +95,9 @@ telegram() {
 }
 postman() {
   showhide("ahk_exe Postman.exe", "C:\Users\pznfo\AppData\Local\Postman\app-10.24.26\Postman.exe")
+}
+xmind() {
+  showhide("ahk_exe Xmind.exe", "C:\Users\pznfo\AppData\Local\Programs\Xmind\Xmind.exe")
 }
 showhide(a, b) {
   hwnd := WinExist(a)
