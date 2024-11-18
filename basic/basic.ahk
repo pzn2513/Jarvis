@@ -44,9 +44,9 @@ DetectHiddenWindows True
 ^+#Left:: mouse_spy_exe()
 ; shift+小键盘比较特殊，能用，会改变输入法中英状态，松开时再变回来 | 这按键和&按键远控不行
 NumpadIns:: w_hide_show(0) ;+Numpad0
-NumpadEnd:: w_move(1) ;+Numpad1
-NumpadDown:: w_move(2) ;+Numpad2
-NumpadPgdn:: w_move(3) ;+Numpad3
+NumpadEnd:: w_move(0) ;+Numpad1
+NumpadDown:: w_move(1) ;+Numpad2
+NumpadPgdn:: w_move(2) ;+Numpad3
 
 
 ; PgDn & Numpad0:: tip("PgDn热键，拦截原功能，只做热键触发器")
