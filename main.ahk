@@ -94,7 +94,7 @@ telegram() {
   showhide("ahk_class Qt51515QWindowIcon ahk_exe Telegram.exe", "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe")
 }
 postman() {
-  showhide("ahk_exe Postman.exe", "C:\Users\pznfo\AppData\Local\Postman\app-10.24.26\Postman.exe")
+  showhide("ahk_exe Postman.exe", "C:\Users\pznfo\AppData\Local\Postman\app-11.20.0\Postman.exe")
 }
 xmind() {
   showhide("ahk_exe Xmind.exe", "C:\Users\pznfo\AppData\Local\Programs\Xmind\Xmind.exe")
