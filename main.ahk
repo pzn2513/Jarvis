@@ -10,7 +10,8 @@ NumpadRight:: tip(6) ;+Numpad6
 NumpadHome:: tip(debug_json) ;+Numpad7
 NumpadUp:: tip(8) ;+Numpad8
 NumpadPgUp:: tip(9) ;+Numpad9
-!esc:: w_hide_show("esc")
+!esc:: w_hide_show("!esc")
+!CapsLock:: w_hide_show("!caps")
 ; !f1::tip(1)
 ; !f2::tip(2)
 ; !f3::tip(3)
@@ -21,7 +22,7 @@ NumpadPgUp:: tip(9) ;+Numpad9
 ; !f8::tip(8)
 ; !f9::tip(9)
 ; !f0::tip(0)
-!`:: w_hide_show("~")
+!`:: w_hide_show("!``")
 !1:: w_move(0)
 !2:: w_move(1)
 !3:: w_move(2)
@@ -72,10 +73,10 @@ NumpadPgUp:: tip(9) ;+Numpad9
 #backspace:: tip("#backspace")
 ; #+ #- 屏幕放大缩小工具
 ; #0-9 切换程序
-; #` 控制台
+#`::w_hide_show("#``")
 ; #tab 桌面视图
-#CapsLock:: tip("#CapsLock")
-; #esc:: tip("#esc")
+#CapsLock:: w_hide_show("#CapsLock")
+#esc:: w_hide_show("#esc")
 #f1:: telegram
 #f2:: postman
 #f3:: xmind
@@ -91,13 +92,13 @@ NumpadPgUp:: tip(9) ;+Numpad9
 #f12:: telegram
 
 telegram() {
-  showhide("ahk_class Qt51515QWindowIcon ahk_exe Telegram.exe", "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe")
+  showhide("ahk_exe Telegram.exe ahk_class Qt51515QWindowIcon ahk_exe Telegram.exe", "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe")
 }
 postman() {
-  showhide("ahk_exe Postman.exe", "C:\Users\pznfo\AppData\Local\Postman\app-11.20.0\Postman.exe")
+  showhide("ahk_exe Postman.exe ahk_class Chrome_WidgetWin_1", "C:\Users\pznfo\AppData\Local\Postman\app-11.20.0\Postman.exe")
 }
 xmind() {
-  showhide("ahk_exe Xmind.exe", "C:\Users\pznfo\AppData\Local\Programs\Xmind\Xmind.exe")
+  showhide("ahk_exe Xmind.exe ahk_class Chrome_WidgetWin_1", "C:\Users\pznfo\AppData\Local\Programs\Xmind\Xmind.exe")
 }
 showhide(a, b) {
   hwnd := WinExist(a)
@@ -114,7 +115,11 @@ showhide(a, b) {
         return
       }
     } else {
+      ; 有些窗口有同名隐藏进程,会先被唤出造成干扰
       ; 对于隐藏在托盘处的窗口，似乎没有很好的办法
+      ; WinRestore(hwnd)
+      ; WinActivate(hwnd)
+      ; return
     }
   }
   run b
