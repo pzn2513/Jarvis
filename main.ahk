@@ -31,6 +31,8 @@ NumpadPgUp:: tip(9) ;+Numpad9
 !6:: tip(6)
 ; +f1::tip(1)
 
+^f12:: w_top_toggle()
+
 ; 一些win键没用甚至副作用，拦截掉
 ; 下排
 #AppsKey:: tip("#AppsKey")
@@ -67,7 +69,7 @@ NumpadPgUp:: tip(9) ;+Numpad9
 #i:: tip("#i")
 #u:: tip("#u")
 #y:: tip("#y")
-#t:: w_top_toggle()
+#t:: tip("#t")
 #w:: tip("#w")
 #q:: tip("#q")
 #backspace:: tip("#backspace")
