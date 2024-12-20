@@ -54,12 +54,16 @@ block_click(x, y, cross := 1) {
   ; cross 是否跨应用
   global mX, mY, wId
   if (cross) {
+
     hwnd := WinExist("A")
-    mouse_spy(0)
+    mouse_spy(0,"Screen")
     if (!mX) {
       MsgBox "意外：hwnd:" hwnd "，mX:" mX
     }
     BlockInput true
+    A_CoordModeToolTip := "Screen"
+    A_CoordModePixel := "Screen"
+    A_CoordModeMouse := "Screen"    
     MouseMove x, y, 0
     ; send "{alt down}"
     sendstd "LBUTTON", 40, 5

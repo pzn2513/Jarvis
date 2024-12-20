@@ -102,10 +102,11 @@
     ; new 以后注释上面，能成功完成流程可以去掉
     [() => mgetpix([[582,297,0x7BFE00, 12], [1021,946,0x00CC0D, 6]]), () => waitpix(1019, 1017, 0x00CC0D, 6, -2, () => click(1153, 894))],
     [() => mgetpix([[582,264,0x7BFE00, 12], [1020,979,0x00CC0D, 6]]), () => waitpix(1019, 1017, 0x00CC0D, 6, -2, () => click(1155,964))],
+    ; 586,393,0x75EC03 1021,847,0x00CC0D
     ; [() => mgetpix([[584,360,0x72ED03, 12], [1018,880,0x00CC0D, 6]]), () => waitpix(1019, 1017, 0x00CC0D, 6, -2, () => click(1159,867))], ;到这阶段已经打完奖励
-  ], "战斗", 1, 零号业绩_shark_fight,,120000)
-  if(timeout){
-    MsgBox timeout
+  ], "战斗", 1, 零号业绩_shark_fight,,80000)
+  if(timeout=="timeout"){
+    msgbox_autoclose timeout
   }
 }
 零号业绩_shark_fight() {

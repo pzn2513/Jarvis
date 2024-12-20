@@ -1,4 +1,5 @@
 #include "./basic/basic.ahk"
+#include "./ks.ahk"
 #include "./绝区零/绝区零.ahk"
 #include "./原神/原神.ahk"
 #include "./星铁/星铁.ahk"
@@ -77,11 +78,11 @@ NumpadPgUp:: tip(9) ;+Numpad9
 ; #0-9 切换程序
 #`::w_hide_show("#``")
 ; #tab 桌面视图
-#CapsLock:: w_hide_show("#CapsLock")
+; #CapsLock:: w_hide_show("#CapsLock") ;现测试占用
 #esc:: w_hide_show("#esc")
 #f1:: telegram
 #f2:: postman
-#f3:: xmind
+#f3:: clash
 ; #f3:: 
 ; #f4:: tip("#f4")
 ; #f5:: tip("#f5")
@@ -97,10 +98,10 @@ telegram() {
   showhide("ahk_exe Telegram.exe ahk_class Qt51515QWindowIcon ahk_exe Telegram.exe", "C:\Users\pznfo\AppData\Roaming\Telegram Desktop\Telegram.exe")
 }
 postman() {
-  showhide("ahk_exe Postman.exe ahk_class Chrome_WidgetWin_1", "C:\Users\pznfo\AppData\Local\Postman\app-11.20.0\Postman.exe")
+  showhide("ahk_exe Postman.exe ahk_class Chrome_WidgetWin_1", "C:\Users\pznfo\AppData\Local\Postman\app-11.22.0\Postman.exe")
 }
-xmind() {
-  showhide("ahk_exe Xmind.exe ahk_class Chrome_WidgetWin_1", "C:\Users\pznfo\AppData\Local\Programs\Xmind\Xmind.exe")
+clash() {
+  showhide("ahk_exe clash-verge.exe", "C:\Program Files\Clash Verge\clash-verge.exe")
 }
 showhide(a, b) {
   hwnd := WinExist(a)
@@ -125,6 +126,6 @@ showhide(a, b) {
     }
   }
   run b
-  sleep 300
-  WinActivate(a)
+  ; sleep 300
+  ; WinActivate(a)
 }

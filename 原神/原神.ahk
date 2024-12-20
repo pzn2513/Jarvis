@@ -11,30 +11,34 @@ CapsLock Up:: global spin_stop := true
 ~AppsKey & Numpad1:: 原神_t1()
 PgDn & Numpad7:: help原神
 #HotIf
-
+#CapsLock:: help原神
 help原神() {
-  ; 记住当前窗口和鼠标位置，点去再回来
-  ; 处理原神 星铁 绝区零的选项，尽量不影响办公，轻松过剧情
-  ; 目前先放3屏，后续做灵活兼容
-  A_CoordModeToolTip := "Screen"
-  A_CoordModePixel := "Screen"
-  A_CoordModeMouse := "Screen"
+  ; 有狂点快速过(开发时)和自动悠闲过
+  ; 过各种对话,点到各种框,全屏幕模式默认放在最右侧
   loop {
+    A_CoordModeToolTip := "Screen"
+    A_CoordModePixel := "Screen"
+    A_CoordModeMouse := "Screen"
     ; 5137,567,0xFFFFFF
     ; 5137,641,0xFFFFFF
     ; 5137,715,0xFFFFFF
-    ToolTip "help原神", 1920 * 2, 0, 20
-    if (mgetpix([[5137, 790, 0xFFFFFF], [5129, 802, 0x5E6670, 20]])) {
-      ; 对话选项
-      ; block_click(5210,577)
-      ; block_click(5210,651)
-      ; block_click(5210,725)
-      block_click(5210, 800)
-    } else if (mgetpix([[4774, 966, 0xAE8708], [4798, 1004, 0x110600]])) {
-      ; 点击后继续
-      block_click(4804, 599)
+    ToolTip "help原神: 闲", 1920 * 1, 0, 20
+    if (mgetpix([[2879, 1007, 0xD3C294, 6], [2067, 60, 0xF1D599, 6]])) { ;对话中
+      ToolTip "help原神: 对话中", 1920 * 1, 0, 20
+      block_click(2879, 1007)
+      ; send "{alt down}"
+      ; send "{alt up}"
     }
-    sleep 1000
+    else if (mgetpix([[3227,726,0x878D95,16], [3209,726,0x969CA2, 16]])) { ;对话选项从上往下选2
+      block_click(3267,724)
+    }
+    else if (mgetpix([[3210,801,0x6E757E,16], [3226,803,0x626A74, 16]])) { ;对话选项从上往下选1
+      block_click(3268,799)
+    }
+    else if (mgetpix([[1999,48,0x9F8E6C,16], [3761,45,0xA18F6C, 16]])) { ;对话选项从上往下选3
+      block_click(3761,45)
+    }
+    sleep 250
   }
 }
 spin() {

@@ -38,7 +38,7 @@ mouse_spy_exe() {
   global mouse_spy_bool := !mouse_spy_bool ;mouse_spy_bool的值是可读的，但要修改必须使用global关键字；否则会被AHK认为是局部变量，在表达式中声明未赋值的同时使用就会出错。
   if (mouse_spy_bool) {
     SetTimer(mouse_spy, 100)
-    ; Hotkey("alt",mspy_changeCoord,"On")
+    Hotkey("Tab Up", mspy_changeCoord, "On")
     ; Hotkey("alt up",mspy_changeCoord,"On")
     ; Hotkey("*RButton up",mspy_savePos,"On") ;鼠标右键按下可能会移动鼠标造成误差
     Hotkey("*F1 Up", mspy_savePos, "On")
@@ -61,7 +61,7 @@ mouse_spy_exe() {
   } else {
     SetTimer(mouse_spy, 0)
     ToolTip
-    ; Hotkey("alt",mspy_changeCoord,"Off")
+    Hotkey("Tab Up", mspy_changeCoord, "Off")
     ; Hotkey("alt up",mspy_changeCoord,"Off")
     ; Hotkey("*RButton up",mspy_savePos,"Off")
     Hotkey("*F1 Up", mspy_savePos, "Off")
@@ -84,27 +84,51 @@ mouse_spy_exe() {
   }
 }
 mspy_up(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX, mY - 1, 0
 }
 mspy_down(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX, mY + 1, 0
 }
 mspy_right(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX + 1, mY, 0
 }
 mspy_left(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX - 1, mY, 0
 }
 mspy_up_fast(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX, mY - 10, 0
 }
 mspy_down_fast(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX, mY + 10, 0
 }
 mspy_right_fast(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX + 10, mY, 0
 }
 mspy_left_fast(ThisHotkey) {
+  A_CoordModeToolTip := CoordMode_RelativeTo
+  A_CoordModePixel := CoordMode_RelativeTo
+  A_CoordModeMouse := CoordMode_RelativeTo
   click mX - 10, mY, 0
 }
 mspy_changeCoord(ThisHotkey) {
@@ -127,14 +151,20 @@ mspy_saveClass(ThisHotkey) {
   mouse_spy_exe()
 }
 mspy_saveColor(ThisHotkey) {
-  A_Clipboard := StrReplace(mColor,"0x","#")
+  A_Clipboard := StrReplace(mColor, "0x", "#")
   mouse_spy_exe()
 }
-mouse_spy(dotip := true, RelativeTo := "Client") {
+mouse_spy(dotip := true, mode := false) {
   ; CoordMode不使用默认就是Client，适合大多数情况
-  ; CoordMode("Mouse", CoordMode_RelativeTo)
-  ; CoordMode("ToolTip", CoordMode_RelativeTo)
-  ; CoordMode("Pixel", CoordMode_RelativeTo)
+  if (mode) {
+    A_CoordModeToolTip := mode
+    A_CoordModePixel := mode
+    A_CoordModeMouse := mode
+  } else {
+    A_CoordModeToolTip := CoordMode_RelativeTo
+    A_CoordModePixel := CoordMode_RelativeTo
+    A_CoordModeMouse := CoordMode_RelativeTo
+  }
   global mX, mY, mColor, wId, wX, wY, wW, wH, wTitle, wClass, wExe, wPath
   MouseGetPos(&mX, &mY, &wId)
   mColor := PixelGetColor(mX, mY, "RGB")
