@@ -103,6 +103,9 @@ postman() {
 clash() {
   showhide("ahk_exe clash-verge.exe", "C:\Program Files\Clash Verge\clash-verge.exe")
 }
+redis() {
+  showhide("ahk_exe Another Redis Desktop Manager.exe", "C:\Code\software\Redis-Desktop-Manager\Another Redis Desktop Manager.exe")
+}
 showhide(a, b) {
   hwnd := WinExist(a)
   if (hwnd) {
