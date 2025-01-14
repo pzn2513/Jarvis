@@ -3,6 +3,7 @@
  * @author Ghini
  * @description 窗口相关操作
  * 窗口检测，隐藏，移动，置顶等
+ * 开机启动
  ***********************************************************************/
 
 
@@ -12,6 +13,22 @@ hide_id := ""
 mouse_spy_bool := false
 CoordMode_RelativeTo := "Client" ; Screen , Window , Client(default)
 hide_ids := {}
+
+
+; 开机启动,检查并启动程序
+startrun(exePath) {
+  SplitPath(exePath, &processName)
+  try {
+      if !ProcessExist(processName) {
+          Run exePath
+          ; 可选：等待程序启动
+          ; WinWait "程序窗口标题"
+          return true
+      }
+  } catch as err {
+      MsgBox "启动失败: " err.Message "，路径: " exePath
+  }
+}
 w_hide_show(signal) {
   global hide_ids
   if (hide_ids.HasProp(signal)) {

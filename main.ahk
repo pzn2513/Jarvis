@@ -4,6 +4,9 @@
 #include "./原神/原神.ahk"
 #include "./星铁/星铁.ahk"
 
+startrun 'C:\Program Files\LGHUB\system_tray\lghub_system_tray.exe'
+; startrun 'C:\Program Files\WindowsApps\DD146E41.Eudict_13.7.0.0_x64__wq1nbytamsrkg\eudic.exe'
+
 /* 在此自定义实用快捷键 */
 NumpadLeft:: help原神() ;+Numpad4
 NumpadClear:: help星铁() ;+Numpad5
